@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept Defense — Pacay, Sabenorio, San Juan, Talaran</title>
+<style>
+  :root{
+    --paper:#F6F1E7;
+    --ink:#1F2A24;
+    --green:#33523E;
+    --green-deep:#21362A;
+    --gold:#C8923A;
+    --line:#D8CDB8;
+    --card:#FFFDF8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Georgia',serif;
+    line-height:1.6;
+  }
+  .stamp-font{font-family:'Courier New',monospace; letter-spacing:.12em; text-transform:uppercase;}
+
+  /* HEADER */
+  header{
+    background:var(--green-deep);
+    color:var(--paper);
+    padding:48px 24px 36px;
+    text-align:center;
+    position:relative;
+    border-bottom:6px solid var(--gold);
+  }
+  header .eyebrow{
+    font-family:'Courier New',monospace;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  header h1{
+    font-size:clamp(1.8rem,5vw,3rem);
+    margin:0 0 10px;
+    font-weight:700;
+    letter-spacing:.01em;
+  }
+  header p.team{
+    font-size:1rem;
+    opacity:.85;
+    margin:6px 0 0;
+  }
+  header p.school{
+    font-size:.85rem;
+    opacity:.65;
+    margin:18px 0 0;
+    font-family:'Courier New',monospace;
+    letter-spacing:.08em;
+  }
+
+  /* NAV TABS */
+  nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:0;
+    background:var(--green);
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  nav button{
+    flex:1 1 auto;
+    min-width:160px;
+    border:none;
+    background:transparent;
+    color:rgba(246,241,231,.65);
+    font-family:'Courier New',monospace;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    font-size:.8rem;
+    padding:16px 12px;
+    cursor:pointer;
+    border-bottom:4px solid transparent;
+    transition:.2s;
+  }
+  nav button:hover{ color:var(--paper); background:rgba(255,255,255,.04); }
+  nav button.active{
+    color:var(--paper);
+    border-bottom:4px solid var(--gold);
+    background:var(--green-deep);
+  }
+
+  main{ max-width:920px; margin:0 auto; padding:40px 24px 80px; }
+
+  .panel{ display:none; animation:fade .4s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  .concept-head{
+    border-left:5px solid var(--gold);
+    padding-left:18px;
+    margin-bottom:32px;
+  }
+  .concept-head .tag{
+    font-family:'Courier New',monospace;
+    text-transform:uppercase;
+    letter-spacing:.2em;
+    font-size:.72rem;
+    color:var(--green);
+    margin-bottom:6px;
+    display:block;
+  }
+  .concept-head h2{
+    font-size:clamp(1.4rem,4vw,2.1rem);
+    margin:0 0 6px;
+    color:var(--green-deep);
+  }
+  .concept-head .subtitle{
+    font-size:1rem;
+    color:#5b6760;
+    margin:0;
+  }
+
+  section.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:24px 28px;
+    margin-bottom:24px;
+    box-shadow:0 1px 4px rgba(0,0,0,.04);
+  }
+  section.card h3{
+    margin-top:0;
+    font-size:1.05rem;
+    color:var(--green-deep);
+    border-bottom:1px solid var(--line);
+    padding-bottom:8px;
+    margin-bottom:14px;
+    font-family:'Courier New',monospace;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:.85rem;
+  }
+  section.card p{ margin:0 0 10px; }
+  section.card ul{ margin:0; padding-left:22px; }
+  section.card li{ margin-bottom:6px; }
+
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:720px){ .two-col{ grid-template-columns:1fr; } }
+
+  .pill-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:6px;
+  }
+  .pill{
+    background:rgba(51,82,62,.08);
+    border:1px solid var(--line);
+    color:var(--green-deep);
+    border-radius:20px;
+    padding:5px 14px;
+    font-size:.85rem;
+    font-family:'Courier New',monospace;
+  }
+
+  .stack-list{ list-style:none; padding:0; margin:0; }
+  .stack-list li{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    border-bottom:1px dashed var(--line);
+    padding:8px 0;
+    font-size:.95rem;
+  }
+  .stack-list li:last-child{ border-bottom:none; }
+  .stack-list b{ color:var(--green-deep); }
+
+  .module-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:10px;
+  }
+  .module-grid div{
+    background:rgba(200,146,58,.08);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:10px 12px;
+    font-size:.88rem;
+    color:var(--green-deep);
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 50px;
+    font-family:'Courier New',monospace;
+    font-size:.75rem;
+    letter-spacing:.1em;
+    color:#8a8174;
+  }
+
+  /* simple table */
+  table{ width:100%; border-collapse:collapse; font-size:.9rem; }
+  table th, table td{ text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); }
+  table th{ font-family:'Courier New',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:.72rem; color:var(--green); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">CAP1 — Capstone Project &amp; Research 1 · Concept Defense</div>
+  <h1>Three Concepts, One Team</h1>
+  <p class="team">Pacay, Fe Jay · Sabenorio, Jonas · San Juan, Razel · Talaran, Danica</p>
+  <p class="school">Partido State University · College of Engineering and Computational Sciences · Dept. of Computational Sciences · BS Information Technology · Facilitator: Kennedy C. Cuya</p>
+</header>
+
+<nav>
+  <button class="active" data-target="c1">Concept 1 · AgriMarket</button>
+  <button data-target="c2">Concept 2 · GeoVision</button>
+  <button data-target="c4">Concept 4 · EternalMap</button>
+</nav>
+
+<main>
+
+  <!-- CONCEPT 1 -->
+  <section class="panel active" id="c1">
+    <div class="concept-head">
+      <span class="tag">Concept 01 · Agriculture &amp; Market Information</span>
+      <h2>Web-Based Agricultural Market Demand &amp; Supply Information System</h2>
+      <p class="subtitle">With price and demand prediction for farmers and local markets — Partido Area</p>
+    </div>
+
+    <section class="card">
+      <h3>Problem</h3>
+      <p>Farmers in the Partido area often sell harvests at low prices because they lack access to updated market demand and price information, relying heavily on middlemen. At the same time, vendors and buyers struggle to find sufficient suppliers when crops become scarce — there is no centralized platform connecting farmers, traders, vendors, and the Municipal Agriculture Office.</p>
+    </section>
+
+    <section class="card">
+      <h3>Proposed Solution</h3>
+      <p>A centralized web platform where farmers post available harvests (crop type, quantity, location, price) while vendors and buyers post demand and required quantities. The system matches supply with demand and visualizes market trends through a shared dashboard.</p>
+      <div class="module-grid">
+        <div>Crop availability posting</div>
+        <div>Market demand posting</div>
+        <div>Supply–demand matching engine</div>
+        <div>Market information dashboard</div>
+        <div>Historical data management</div>
+        <div>Predictive analytics (ML)</div>
+      </div>
+    </section>
+
+    <div class="two-col">
+      <section class="card">
+        <h3>User Roles</h3>
+        <ul>
+          <li><b>Administrator</b> — manages users, data, reports, settings</li>
+          <li><b>Farmer</b> — posts harvests, views demand &amp; price info</li>
+          <li><b>Trader</b> — monitors supply, facilitates transactions</li>
+          <li><b>Market Vendor / Buyer</b> — posts requirements, searches suppliers</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h3>Tech Stack</h3>
+        <ul class="stack-list">
+          <li><span>Backend</span><b>Laravel (PHP)</b></li>
+          <li><span>Database</span><b>MySQL</b></li>
+          <li><span>Frontend</span><b>HTML, CSS, JS, Bootstrap</b></li>
+          <li><span>Prediction</span><b>Linear regression / time-series</b></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card">
+      <h3>Empathize → Define → Ideate</h3>
+      <p><b>Empathize:</b> Farmers don't know where demand is highest and sometimes sell below market value; vendors struggle to locate suppliers; agricultural offices lack centralized monitoring data.</p>
+      <p><b>Define:</b> How can a web-based agricultural information system improve communication between farmers and markets by providing centralized supply–demand information and predictive analytics to support better marketing decisions?</p>
+      <p><b>Ideate:</b> A centralized platform with real-time supply/demand dashboard, price monitoring, crop search &amp; filtering, geographic market info, historical records, and ML-based price/demand prediction.</p>
+    </section>
+  </section>
+
+  <!-- CONCEPT 2 -->
+  <section class="panel" id="c2">
+    <div class="concept-head">
+      <span class="tag">Concept 02 · Educational Technology · 3D Visualization</span>
+      <h2>GeoVision</h2>
+      <p class="subtitle">A web and mobile-based interactive 3D geological rock &amp; mineral learning platform for Geology students of Partido State University</p>
+    </div>
+
+    <section class="card">
+      <h3>Problem</h3>
+      <p>Geology students at PSU primarily learn through textbooks, PDFs, static images, and physical specimens limited to lab sessions. Two-dimensional materials make it hard to visualize the three-dimensional structure of rocks and minerals, and limited access to specimens outside lab hours restricts independent study.</p>
+    </section>
+
+    <section class="card">
+      <h3>Proposed Solution</h3>
+      <p>An interactive learning platform offering 3D models of rocks and minerals that students can rotate, zoom, and examine from any angle, paired with educational labels covering classification, properties, composition, and formation processes. A mobile app allows offline downloads of modules and 3D specimens for areas with limited connectivity.</p>
+      <div class="module-grid">
+        <div>360° 3D specimen viewer</div>
+        <div>Educational annotations &amp; labels</div>
+        <div>Content management (web)</div>
+        <div>Learning modules &amp; quizzes</div>
+        <div>Offline download mode</div>
+        <div>Search &amp; filtering tools</div>
+      </div>
+    </section>
+
+    <div class="two-col">
+      <section class="card">
+        <h3>Stakeholders</h3>
+        <ul>
+          <li><b>Geology Students</b> — explore 3D specimens anytime</li>
+          <li><b>Instructors</b> — dynamic, interactive teaching tools</li>
+          <li><b>Partido State University</b> — innovation in geology education</li>
+          <li><b>Future Researchers</b> — reference for edtech R&amp;D</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h3>Tech Stack</h3>
+        <ul class="stack-list">
+          <li><span>Mobile</span><b>Flutter</b></li>
+          <li><span>Web</span><b>React.js / Next.js</b></li>
+          <li><span>Backend</span><b>Node.js</b></li>
+          <li><span>Database</span><b>PostgreSQL / MySQL</b></li>
+          <li><span>3D Assets</span><b>Blender, Photogrammetry, Meshy AI</b></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card">
+      <h3>Empathize → Define → Ideate</h3>
+      <p><b>Empathize:</b> Students must mentally imagine specimens from unseen angles using static images; access to physical specimens is limited to lab sessions; instructors lack interactive digital teaching tools.</p>
+      <p><b>Define:</b> Lack of an interactive, accessible learning platform that lets geology students visualize, explore, and understand rocks and minerals beyond traditional classroom resources.</p>
+      <p><b>Ideate:</b> GeoVision — a web &amp; mobile platform with interactive 3D models, annotations, quizzes, downloadable offline content, and mobile accessibility to bridge traditional and digital geology instruction.</p>
+    </section>
+  </section>
+
+  <!-- CONCEPT 4 -->
+  <section class="panel" id="c4">
+    <div class="concept-head">
+      <span class="tag">Concept 04 · GIS · Public Service Information System</span>
+      <h2>EternalMap</h2>
+      <p class="subtitle">A web and mobile-based cemetery mapping &amp; grave information management system for LGUs and cemetery administrators</p>
+    </div>
+
+    <section class="card">
+      <h3>Problem</h3>
+      <p>Many cemeteries in the Partido district rely on manual record-keeping — paper logbooks and physical maps — making it hard to manage burial records, track plot occupancy, and locate gravesites. Visitors often struggle to find graves, especially during occasions like All Souls' Day, due to outdated maps and lack of signage.</p>
+    </section>
+
+    <section class="card">
+      <h3>Proposed Solution</h3>
+      <p>An interactive digital cemetery map letting visitors search for deceased individuals and view exact plot locations, with a mobile app for navigation. Administrators get a web platform to manage burial records, register new burials, update plot info, monitor occupancy, and generate reports — built on GIS mapping technologies.</p>
+      <div class="module-grid">
+        <div>Interactive digital cemetery map</div>
+        <div>Gravesite search</div>
+        <div>Navigation assistance</div>
+        <div>Burial records management</div>
+        <div>Plot occupancy monitoring</div>
+        <div>Admin reporting tools</div>
+      </div>
+    </section>
+
+    <div class="two-col">
+      <section class="card">
+        <h3>Stakeholders</h3>
+        <ul>
+          <li><b>Visitors &amp; Families</b> — locate graves quickly via map &amp; search</li>
+          <li><b>Cemetery Administrators</b> — streamlined record &amp; plot management</li>
+          <li><b>Local Government Units</b> — organized burial records, better governance</li>
+          <li><b>Future Researchers</b> — reference for GIS-based public records systems</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h3>Tech Stack</h3>
+        <ul class="stack-list">
+          <li><span>Mobile</span><b>Flutter</b></li>
+          <li><span>Web</span><b>React.js / Next.js</b></li>
+          <li><span>Backend</span><b>Node.js</b></li>
+          <li><span>Database</span><b>PostgreSQL / MySQL</b></li>
+          <li><span>Mapping</span><b>Google Maps API / Leaflet</b></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card">
+      <h3>Empathize → Define → Ideate</h3>
+      <p><b>Empathize:</b> Visitors waste time searching for gravesites in large cemeteries with poor signage; administrators struggle to maintain accurate records and track available plots manually.</p>
+      <p><b>Define:</b> Lack of a centralized, interactive cemetery management system for efficient burial record management and accurate gravesite location services.</p>
+      <p><b>Ideate:</b> EternalMap — an interactive map for searching deceased individuals and locating plots, paired with admin tools for record management, occupancy monitoring, and report generation, integrating GIS and mobile accessibility.</p>
+    </section>
+  </section>
+
+</main>
+
+<footer>
+  Concept Defense · Partido State University · June 2026
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('nav button');
+  const panels = document.querySelectorAll('.panel');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
