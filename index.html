@@ -6,277 +6,69 @@
 <title>Concept Defense — Pacay, Sabenorio, San Juan, Talaran</title>
 <style>
 :root {
-  --bg: #F4F1EC;
-  --surface: #FDFCF8;
-  --surface2: #F0EDE6;
-  --border: #DDD8CE;
-  --ink: #1C2620;
-  --ink2: #4A5550;
-  --green: #2D4A38;
-  --green-mid: #3D6450;
-  --green-light: rgba(45,74,56,.08);
-  --gold: #B8822E;
-  --gold-light: rgba(184,130,46,.1);
-  --radius: 8px;
-  --shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(0,0,0,.04);
+  --bg:#F4F1EC; --surface:#FDFCF8; --surface2:#F0EDE6; --border:#DDD8CE;
+  --ink:#1C2620; --ink2:#4A5550;
+  --green:#2D4A38; --green-mid:#3D6450; --green-light:rgba(45,74,56,.08);
+  --gold:#B8822E; --gold-light:rgba(184,130,46,.1);
+  --radius:8px; --shadow:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.04);
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Georgia', serif;
-  font-size: 15px;
-  line-height: 1.7;
-}
-a { color: var(--green); }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Georgia',serif;font-size:15px;line-height:1.7;}
+a{color:var(--green);}
 
-/* ── HEADER ── */
-header {
-  background: var(--green);
-  color: #F4F1EC;
-  padding: 44px 24px 36px;
-  text-align: center;
-  border-bottom: 3px solid var(--gold);
-}
-.header-badge {
-  display: inline-block;
-  font-family: 'Courier New', monospace;
-  font-size: .7rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid rgba(184,130,46,.4);
-  border-radius: 20px;
-  padding: 4px 14px;
-  margin-bottom: 18px;
-}
-.header-team {
-  font-size: 1.05rem;
-  opacity: .9;
-  margin-bottom: 6px;
-  letter-spacing: .01em;
-}
-.header-school {
-  font-family: 'Courier New', monospace;
-  font-size: .72rem;
-  letter-spacing: .06em;
-  opacity: .55;
-  line-height: 1.9;
-}
+header{background:var(--green);color:#F4F1EC;padding:44px 24px 36px;text-align:center;border-bottom:3px solid var(--gold);}
+.header-badge{display:inline-block;font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,130,46,.4);border-radius:20px;padding:4px 14px;margin-bottom:18px;}
+.header-team{font-size:1.05rem;opacity:.9;margin-bottom:6px;}
+.header-school{font-family:'Courier New',monospace;font-size:.72rem;letter-spacing:.06em;opacity:.55;line-height:1.9;}
 
-/* ── NAV ── */
-nav {
-  background: var(--green);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2px;
-  padding: 0 12px 10px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 12px rgba(0,0,0,.18);
-}
-nav button {
-  border: none;
-  background: rgba(255,255,255,.07);
-  color: rgba(244,241,236,.6);
-  font-family: 'Courier New', monospace;
-  font-size: .72rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 9px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background .15s, color .15s;
-}
-nav button:hover { background: rgba(255,255,255,.13); color: #F4F1EC; }
-nav button.active {
-  background: var(--gold);
-  color: #fff;
-  font-weight: bold;
-}
+nav{background:var(--green);display:flex;justify-content:center;flex-wrap:wrap;gap:2px;padding:0 12px 10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+nav button{border:none;background:rgba(255,255,255,.07);color:rgba(244,241,236,.6);font-family:'Courier New',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:9px 18px;border-radius:6px;cursor:pointer;transition:background .15s,color .15s;}
+nav button:hover{background:rgba(255,255,255,.13);color:#F4F1EC;}
+nav button.active{background:var(--gold);color:#fff;font-weight:bold;}
 
-/* ── MAIN ── */
-main { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+main{max-width:900px;margin:0 auto;padding:40px 20px 80px;}
+.panel{display:none;}
+.panel.active{display:block;animation:rise .35s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-.panel { display: none; }
-.panel.active { display: block; animation: rise .35s ease; }
-@keyframes rise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.concept-head{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.concept-tag{display:inline-block;font-family:'Courier New',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.concept-head h2{font-size:clamp(1.3rem,3.2vw,1.9rem);color:var(--green);line-height:1.28;margin-bottom:8px;}
+.concept-subtitle{font-size:.92rem;color:var(--ink2);font-style:italic;}
 
-/* ── CONCEPT HEADER ── */
-.concept-head {
-  margin-bottom: 28px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--border);
-}
-.concept-tag {
-  display: inline-block;
-  font-family: 'Courier New', monospace;
-  font-size: .68rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-.concept-head h2 {
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
-  color: var(--green);
-  line-height: 1.25;
-  margin-bottom: 8px;
-}
-.concept-subtitle {
-  font-size: .92rem;
-  color: var(--ink2);
-  font-style: italic;
-}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;box-shadow:var(--shadow);}
+.card-title{font-family:'Courier New',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green-mid);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.card p{color:var(--ink);margin-bottom:10px;}
+.card p:last-child{margin-bottom:0;}
+.card ul{padding-left:18px;}
+.card li{margin-bottom:6px;color:var(--ink);}
 
-/* ── CARDS ── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-}
-.card-title {
-  font-family: 'Courier New', monospace;
-  font-size: .68rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--green-mid);
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.card p { color: var(--ink); margin-bottom: 10px; }
-.card p:last-child { margin-bottom: 0; }
-.card ul { padding-left: 18px; }
-.card li { margin-bottom: 6px; color: var(--ink); }
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:680px){.two-col{grid-template-columns:1fr;}}
 
-/* ── TWO COL ── */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-@media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+.pill{background:var(--green-light);border:1px solid rgba(45,74,56,.15);color:var(--green);border-radius:20px;padding:3px 12px;font-size:.8rem;font-family:'Courier New',monospace;}
 
-/* ── PILL TAGS ── */
-.pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
-.pill {
-  background: var(--green-light);
-  border: 1px solid rgba(45,74,56,.15);
-  color: var(--green);
-  border-radius: 20px;
-  padding: 3px 12px;
-  font-size: .8rem;
-  font-family: 'Courier New', monospace;
-}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;margin-top:10px;}
+.feat-grid div{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:.85rem;color:var(--ink2);line-height:1.4;}
 
-/* ── FEATURE GRID ── */
-.feat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-  gap: 8px;
-  margin-top: 10px;
-}
-.feat-grid div {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 9px 12px;
-  font-size: .85rem;
-  color: var(--ink2);
-  line-height: 1.4;
-}
+.stack-list{list-style:none;}
+.stack-list li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed var(--border);font-size:.9rem;}
+.stack-list li:last-child{border-bottom:none;}
+.stack-list span{color:var(--ink2);}
+.stack-list b{color:var(--ink);text-align:right;}
 
-/* ── SPLIT BOXES ── */
-.split-box {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 14px 16px;
-}
-.split-box b { display: block; color: var(--green); margin-bottom: 5px; font-size: .9rem; }
-.split-box p { font-size: .88rem; color: var(--ink2); margin: 0; }
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;}
+.flow-step{background:var(--green-light);border:1px solid rgba(45,74,56,.15);border-radius:6px;padding:7px 13px;font-size:.82rem;color:var(--green);font-family:'Courier New',monospace;}
+.flow-arrow{color:var(--gold);font-weight:bold;font-size:1rem;}
+.flow-result{background:var(--gold-light);border:1px solid rgba(184,130,46,.25);border-radius:6px;padding:7px 13px;font-size:.82rem;color:var(--gold);font-weight:bold;font-family:'Courier New',monospace;width:100%;text-align:center;margin-top:4px;}
 
-/* ── STACK LIST ── */
-.stack-list { list-style: none; }
-.stack-list li {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 7px 0;
-  border-bottom: 1px dashed var(--border);
-  font-size: .9rem;
-}
-.stack-list li:last-child { border-bottom: none; }
-.stack-list span { color: var(--ink2); }
-.stack-list b { color: var(--ink); text-align: right; }
+.demo-link{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;text-decoration:none;padding:11px 22px;border-radius:6px;font-family:'Courier New',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-top:16px;transition:background .15s;box-shadow:0 2px 8px rgba(45,74,56,.25);}
+.demo-link:hover{background:var(--green-mid);}
+.demo-note{font-size:.78rem;color:var(--ink2);margin-top:8px;font-style:italic;}
 
-/* ── FLOW STEPS ── */
-.flow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin-top: 10px;
-}
-.flow-step {
-  background: var(--green-light);
-  border: 1px solid rgba(45,74,56,.15);
-  border-radius: 6px;
-  padding: 7px 13px;
-  font-size: .82rem;
-  color: var(--green);
-  font-family: 'Courier New', monospace;
-}
-.flow-arrow { color: var(--gold); font-weight: bold; font-size: 1rem; }
-.flow-result {
-  background: var(--gold-light);
-  border: 1px solid rgba(184,130,46,.25);
-  border-radius: 6px;
-  padding: 7px 13px;
-  font-size: .82rem;
-  color: var(--gold);
-  font-weight: bold;
-  font-family: 'Courier New', monospace;
-  width: 100%;
-  text-align: center;
-  margin-top: 4px;
-}
-
-/* ── 3D DEMO LINK ── */
-.demo-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  background: var(--green);
-  color: #fff;
-  text-decoration: none;
-  padding: 11px 22px;
-  border-radius: 6px;
-  font-family: 'Courier New', monospace;
-  font-size: .8rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  margin-top: 16px;
-  transition: background .15s;
-  box-shadow: 0 2px 8px rgba(45,74,56,.25);
-}
-.demo-link:hover { background: var(--green-mid); }
-.demo-link svg { width: 16px; height: 16px; fill: currentColor; }
-.demo-note { font-size: .78rem; color: var(--ink2); margin-top: 8px; font-style: italic; }
-
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 28px 20px 50px;
-  font-family: 'Courier New', monospace;
-  font-size: .7rem;
-  letter-spacing: .1em;
-  color: #9A9188;
-  text-transform: uppercase;
-}
+footer{text-align:center;padding:28px 20px 50px;font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.1em;color:#9A9188;text-transform:uppercase;}
 </style>
 </head>
 <body>
@@ -291,7 +83,7 @@ footer {
 </header>
 
 <nav>
-  <button class="active" data-target="c1">Concept 1</button>
+  <button class="active" data-target="c1">Concept 1 · AgriMarket</button>
   <button data-target="c2">Concept 2 · Geora</button>
   <button data-target="c3">Concept 3 · Cyber Investigator</button>
   <button data-target="c4">Concept 4 · Cemora</button>
@@ -299,31 +91,48 @@ footer {
 
 <main>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════════════════
      CONCEPT 1 — AgriMarket
-═══════════════════════════════════════ -->
+══════════════════════════════════════════════════════ -->
 <section class="panel active" id="c1">
   <div class="concept-head">
-    <span class="concept-tag">Concept 01 · Agriculture &amp; Market Information</span>
+    <span class="concept-tag">Concept 01 · Agriculture &amp; Market Information System</span>
     <h2>AgriMarket: A Web-Based Agricultural Market Demand and Supply Information System with Price and Demand Prediction for Farmers and Local Markets in the Partido Area</h2>
-    <p class="concept-subtitle">Connecting farmers, traders, vendors, and the Municipal Agriculture Office through a centralized supply–demand platform</p>
+    <p class="concept-subtitle">Applied Research · System Development</p>
   </div>
 
   <div class="card">
-    <p class="card-title">Problem</p>
-    <p>Farmers in the Partido area often sell harvests at low prices because they lack access to updated market demand and price information, relying heavily on middlemen. At the same time, vendors and buyers struggle to find sufficient suppliers when crops become scarce — there is no centralized platform connecting farmers, traders, vendors, and the Municipal Agriculture Office.</p>
+    <p class="card-title">Problem Setting</p>
+    <p>Farmers in the Partido area often sell their harvests at low prices because they lack access to updated market demand and price information, forcing them to rely heavily on middlemen who control price negotiations. At the same time, vendors and buyers struggle to find sufficient suppliers when crops become scarce due to the absence of a centralized platform connecting all market participants.</p>
+    <p>There is no existing system that links farmers, traders, vendors, and the Municipal Agriculture Office in a shared information environment. This disconnect results in price inefficiencies, supply shortages, and missed market opportunities on both sides of the agricultural value chain.</p>
+    <div class="pills">
+      <span class="pill">No centralized market data</span>
+      <span class="pill">Farmer dependency on middlemen</span>
+      <span class="pill">No supply–demand visibility</span>
+      <span class="pill">No price prediction tools</span>
+      <span class="pill">Disconnected stakeholders</span>
+    </div>
   </div>
 
   <div class="card">
-    <p class="card-title">Proposed Solution</p>
-    <p>A centralized web platform where farmers post available harvests (crop type, quantity, location, price) while vendors and buyers post demand and required quantities. The system matches supply with demand and visualizes market trends through a shared dashboard with ML-based predictive analytics.</p>
+    <p class="card-title">Project Concept</p>
+    <p>AgriMarket is a web-based agricultural market information system designed to connect farmers, traders, vendors, buyers, and the Municipal Agriculture Office through a centralized digital platform. The system enables farmers to post available harvests with crop type, quantity, location, and price, while vendors and buyers can post their demand and required quantities.</p>
+    <p>The platform provides a shared market information dashboard that visualizes current supply and demand trends, price movements, and geographic market data. By bringing all agricultural market participants into a single platform, AgriMarket aims to improve price transparency, reduce dependence on middlemen, and support informed decision-making for all stakeholders in the Partido agricultural sector.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Proposed Solution &amp; Technical Background</p>
+    <p>AgriMarket will be developed as a web application using <b>Laravel (PHP)</b> for the backend and <b>MySQL</b> for database management, with the frontend built using HTML, CSS, JavaScript, and Bootstrap. The system will implement a supply–demand matching engine that pairs available crop listings with buyer requirements in real time.</p>
+    <p>A predictive analytics module using <b>linear regression and time-series analysis</b> will generate price and demand forecasts based on historical market data, helping farmers plan harvest timing and help buyers anticipate supply availability. The system will also maintain historical records of transactions and market trends for reporting and analysis by the Municipal Agriculture Office.</p>
     <div class="feat-grid">
       <div>Crop availability posting</div>
       <div>Market demand posting</div>
-      <div>Supply–demand matching</div>
+      <div>Supply–demand matching engine</div>
       <div>Market information dashboard</div>
       <div>Historical data management</div>
       <div>Predictive analytics (ML)</div>
+      <div>Geographic market info</div>
+      <div>Price monitoring &amp; alerts</div>
     </div>
   </div>
 
@@ -331,10 +140,10 @@ footer {
     <div class="card">
       <p class="card-title">User Roles</p>
       <ul>
-        <li><b>Administrator</b> — manages users, data, reports</li>
-        <li><b>Farmer</b> — posts harvests, views demand &amp; prices</li>
+        <li><b>Administrator</b> — manages users, data, reports, system settings</li>
+        <li><b>Farmer</b> — posts harvests, views demand &amp; price info</li>
         <li><b>Trader</b> — monitors supply, facilitates transactions</li>
-        <li><b>Vendor / Buyer</b> — posts requirements, finds suppliers</li>
+        <li><b>Vendor / Buyer</b> — posts requirements, searches for suppliers</li>
       </ul>
     </div>
     <div class="card">
@@ -349,87 +158,78 @@ footer {
   </div>
 
   <div class="card">
-    <p class="card-title">Design Thinking</p>
-    <p><b>Empathize:</b> Farmers sell below market value without knowing where demand is highest; vendors struggle to locate suppliers; agricultural offices lack centralized monitoring data.</p>
-    <p><b>Define:</b> How can a web-based agricultural information system improve communication between farmers and markets by providing centralized supply–demand information and predictive analytics to support better marketing decisions?</p>
-    <p><b>Ideate:</b> A centralized platform with real-time supply/demand dashboard, price monitoring, crop search &amp; filtering, geographic market info, historical records, and ML-based price/demand prediction.</p>
+    <p class="card-title">Empathize · Define · Ideate</p>
+    <p><b>Empathize:</b> Farmers in the Partido area sell below market value without knowing where demand is highest. They rely on middlemen who take advantage of the information gap. Vendors and traders struggle to locate sufficient suppliers during peak demand periods. The Municipal Agriculture Office lacks centralized data to monitor and support the local agricultural market effectively.</p>
+    <p><b>Define:</b> How can a web-based agricultural market information system improve communication and market transparency between farmers, traders, vendors, and agricultural authorities by providing centralized supply–demand information and predictive analytics to support better marketing and pricing decisions in the Partido area?</p>
+    <p><b>Ideate:</b> AgriMarket — a centralized web platform with real-time supply and demand posting, a market information dashboard, price monitoring, crop search and filtering, geographic market information, historical records, and ML-based price and demand prediction. All four stakeholder roles interact through a single unified system managed by a designated administrator.</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════════════════
      CONCEPT 2 — Geora
-═══════════════════════════════════════ -->
+══════════════════════════════════════════════════════ -->
 <section class="panel" id="c2">
   <div class="concept-head">
-    <span class="concept-tag">Concept 02 · Educational Technology · 3D Visualization</span>
-    <h2>Geora: A Web-Based Interactive 3D Geological Learning Laboratory and Reference Library with Progression-Based Learning Paths and Comparative Specimen Analysis</h2>
-    <p class="concept-subtitle">For Geology Students of Partido State University</p>
+    <span class="concept-tag">Concept 02 · Educational Technology · 3D Visualization · Geological Education</span>
+    <h2>Geora: A Web-Based Interactive 3D Geological Learning Laboratory and Reference Library with Progression-Based Learning Paths and Comparative Specimen Analysis for Geology Students of Partido State University</h2>
+    <p class="concept-subtitle">Applied Research · System Development</p>
   </div>
 
   <div class="card">
-    <p class="card-title">Problem</p>
-    <p>Geology students at PSU learn through textbooks, PDFs, static images, and physical specimens restricted to lab schedules. Two-dimensional materials require students to mentally reconstruct 3D characteristics — leading to misconceptions and limited identification skills. Students also lack tools for comparative specimen analysis, structured learning pathways, and assessment specifically designed for geology.</p>
+    <p class="card-title">Problem Setting</p>
+    <p>Geology education at Partido State University relies primarily on textbooks, PDF modules, classroom lectures, static images, and physical rock and mineral specimens available only during laboratory sessions. Most instructional materials present geological specimens in two-dimensional formats, requiring students to mentally imagine the 3D appearance, texture, crystal structure, and physical characteristics of rocks and minerals from unseen angles.</p>
+    <p>Access to physical specimens is restricted to laboratory schedules, limiting independent study. Although various online resources exist, most lack interactive three-dimensional visualization, comparative analysis tools, structured learning pathways, and assessment mechanisms specifically designed for geology education.</p>
     <div class="pills">
       <span class="pill">Visualization difficulty</span>
       <span class="pill">No interactive resources</span>
       <span class="pill">Limited specimen access</span>
-      <span class="pill">No comparative tools</span>
+      <span class="pill">No comparative analysis tools</span>
       <span class="pill">No structured learning paths</span>
-    </div>
-  </div>
-
-  <div class="two-col">
-    <div class="card">
-      <p class="card-title">📚 Geological Reference Library</p>
-      <div class="split-box" style="margin-bottom:0">
-        <p>Registered users freely browse a centralized specimen collection, view interactive 3D models (OBJ &amp; GLB formats), and compare up to 3 rock or mineral specimens side-by-side with a detailed property comparison table.</p>
-      </div>
-    </div>
-    <div class="card">
-      <p class="card-title">🔬 Virtual Learning Laboratory</p>
-      <div class="split-box" style="margin-bottom:0">
-        <p>Instructors create classes, build prerequisite-based learning trees, administer standard and comparison-based quizzes, and monitor each student's progress through an integrated tracking system.</p>
-      </div>
+      <span class="pill">No integrated assessment</span>
     </div>
   </div>
 
   <div class="card">
-    <p class="card-title">Interactive 3D Specimen Viewer — Demo</p>
-    <p>Geora uses Three.js to render OBJ and GLB geological models directly in the browser. Students can rotate, zoom, and inspect specimens from any angle without installing any software.</p>
-    <a href="viewer.html" target="_blank" class="demo-link">
-      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      Open 3D Specimen Viewer
-    </a>
-    <p class="demo-note">Opens in a new tab · Load any .OBJ or .GLB file from your device · Powered by Three.js</p>
+    <p class="card-title">Project Concept</p>
+    <p>Geora is a web-based interactive geological learning platform that serves two primary functions: a <b>Geological Reference Library</b> and a <b>Virtual Geological Learning Laboratory</b>.</p>
+    <p>As a <b>Geological Reference Library</b>, Geora allows registered users to freely explore a centralized collection of geological specimens, access geological information, view interactive 3D models, and compare up to three rock or mineral specimens simultaneously. The platform supports both OBJ and GLB 3D model formats, allowing administrators to continuously expand the repository.</p>
+    <p>As a <b>Virtual Geological Learning Laboratory</b>, Geora enables instructors to create classes, manage learning activities, design structured learning pathways using a prerequisite-based learning tree, administer assessments, and monitor student progress. Students enrolled in classes progress through learning paths by completing quizzes, including both standard and comparison-based assessments.</p>
   </div>
 
   <div class="card">
-    <p class="card-title">Key Features</p>
+    <p class="card-title">Proposed Solution &amp; Technical Background</p>
+    <p>Geora will be developed as a web application integrating Three.js for 3D model rendering directly in the browser. The system supports OBJ and GLB geological model formats, allowing 360° rotation, zooming, and multi-angle inspection without additional software. A side-by-side comparison interface lets users examine up to three specimens simultaneously with a detailed property comparison table.</p>
+    <p>The learning laboratory component uses a <b>prerequisite-based learning tree</b> where instructors define parent-child relationships between topics and the system automatically generates the visual learning structure. Student progress, completed activities, and assessment results are tracked through an integrated monitoring system accessible to instructors.</p>
     <div class="feat-grid">
       <div>360° rotatable &amp; zoomable 3D models</div>
       <div>Compare up to 3 specimens simultaneously</div>
       <div>OBJ &amp; GLB model format support</div>
-      <div>Prerequisite-based learning tree</div>
+      <div>Prerequisite-based learning tree (auto-generated)</div>
       <div>Standard &amp; comparison-based quizzes</div>
       <div>Student progress tracking</div>
-      <div>Admin specimen repository</div>
+      <div>Admin-managed specimen repository</div>
       <div>Class creation &amp; management</div>
     </div>
+    <a href="viewer.html" target="_blank" class="demo-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      Open 3D Specimen Viewer Demo
+    </a>
+    <p class="demo-note">Load any .OBJ or .GLB file · Drag &amp; drop supported · Powered by Three.js</p>
   </div>
 
   <div class="two-col">
     <div class="card">
       <p class="card-title">Stakeholders</p>
       <ul>
-        <li><b>Geology Students</b> — 3D exploration, guided paths, anytime access</li>
-        <li><b>Instructors</b> — learning paths, assessments, progress monitoring</li>
+        <li><b>Geology Students</b> — 3D exploration, guided learning paths, anytime access</li>
+        <li><b>Instructors</b> — customizable learning paths, assessments, progress monitoring</li>
         <li><b>Partido State University</b> — innovative geology edtech platform</li>
-        <li><b>Other Learners</b> — Earth Science students, researchers</li>
-        <li><b>Future Researchers</b> — reference for virtual labs &amp; 3D edtech</li>
+        <li><b>Other Learners</b> — Earth Science students, researchers, interested individuals</li>
+        <li><b>Future Researchers</b> — reference for virtual labs &amp; 3D digital learning</li>
       </ul>
     </div>
     <div class="card">
-      <p class="card-title">Research Type &amp; Area</p>
+      <p class="card-title">Research Area</p>
       <ul class="stack-list">
         <li><span>Type</span><b>Applied Research / System Development</b></li>
         <li><span>Area 1</span><b>Educational Technology</b></li>
@@ -442,40 +242,49 @@ footer {
   </div>
 
   <div class="card">
-    <p class="card-title">Design Thinking</p>
-    <p><b>Empathize:</b> Students struggle to visualize 3D specimen characteristics from 2D materials and must mentally imagine unseen angles. Physical specimen access is limited to lab hours. Students need comparison tools to identify differences in texture, composition, crystal structure, and formation.</p>
-    <p><b>Define:</b> There is no interactive, accessible, and structured digital platform for geology students that combines 3D specimen visualization, comparative analysis, progression-based learning pathways, and assessment with progress tracking.</p>
-    <p><b>Ideate:</b> Geora — a web-based geological reference library and virtual learning laboratory. Students explore and compare 3D specimens freely, or enroll in instructor-designed classes with prerequisite-gated learning trees, quizzes (including comparison-based), and tracked progress.</p>
+    <p class="card-title">Empathize · Define · Ideate</p>
+    <p><b>Empathize:</b> Geology students struggle to visualize the three-dimensional structure of rocks and minerals from static two-dimensional materials. Physical specimen access is limited to lab schedules, restricting independent study. Students lack tools to compare multiple specimens side by side and have no structured digital pathway to guide their learning progression. Instructors also need digital tools that support interactive instruction and assessment beyond traditional classroom settings.</p>
+    <p><b>Define:</b> The primary problem is the lack of an interactive, accessible, and structured geological learning environment that supports 3D specimen visualization, comparative specimen analysis, guided learning progression, and integrated assessment with progress tracking — specifically designed for geology students of Partido State University.</p>
+    <p><b>Ideate:</b> Geora — a web-based platform functioning as both a geological reference library and a virtual learning laboratory. Students freely explore and compare 3D specimens in the library, or enroll in instructor-designed classes with prerequisite-gated learning trees, standard and comparison-based quizzes, and tracked progress. Administrators manage the specimen repository through OBJ and GLB uploads, continuously expanding the digital geological collection available to all users.</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════════════════
      CONCEPT 3 — Cyber Investigator
-═══════════════════════════════════════ -->
+══════════════════════════════════════════════════════ -->
 <section class="panel" id="c3">
   <div class="concept-head">
-    <span class="concept-tag">Concept 03 · Educational Technology · Gamification &amp; Cybersecurity</span>
+    <span class="concept-tag">Concept 03 · Educational Technology · Gamification · Cybersecurity</span>
     <h2>Cyber Investigator: A Simulation Game for Enhancing Cybersecurity Awareness and Cybercrime Detection Skills</h2>
-    <p class="concept-subtitle">Web-based platform using realistic cybercrime scenarios and gamification to teach cybersecurity investigation</p>
+    <p class="concept-subtitle">Applied Research · System Development</p>
   </div>
 
   <div class="card">
-    <p class="card-title">Problem</p>
-    <p>Many students lack practical cybersecurity awareness and cybercrime detection skills because traditional learning methods focus mainly on theory and provide limited hands-on experience. There is also a lack of interactive tools that allow learners to safely practice investigating cyber threats and analyzing digital evidence.</p>
+    <p class="card-title">Problem Setting</p>
+    <p>Many students lack practical cybersecurity awareness and cybercrime detection skills because traditional learning methods focus mainly on theory and provide limited hands-on experience. Classroom instruction on cybersecurity typically covers concepts, definitions, and principles without giving students the opportunity to apply these in realistic investigation scenarios.</p>
+    <p>Additionally, there is a lack of interactive tools that allow learners to safely practice investigating cyber threats, analyzing digital evidence, and responding to cybersecurity incidents. As a result, students may be underprepared to handle real-world cybersecurity challenges upon entering the workforce.</p>
     <div class="pills">
       <span class="pill">Theory-heavy instruction</span>
       <span class="pill">No safe practice environment</span>
       <span class="pill">Limited hands-on experience</span>
       <span class="pill">Low cybercrime detection skills</span>
+      <span class="pill">No structured investigation practice</span>
     </div>
   </div>
 
   <div class="card">
-    <p class="card-title">Proposed Solution</p>
-    <p>A web-based simulation game where players act as cyber investigators — analyzing digital evidence, system logs, and suspicious activities to solve realistic cybercrime cases covering phishing, malware, ransomware, and data breaches. Gamification elements keep students engaged while instructors monitor outcomes through a centralized dashboard.</p>
+    <p class="card-title">Project Concept</p>
+    <p>Cyber Investigator is a web-based educational simulation game that teaches cybersecurity awareness and cybercrime investigation through realistic, interactive scenarios. Players take on the role of cyber investigators, analyzing digital evidence, examining system logs, and identifying suspicious activities to solve cybercrime cases involving phishing, malware, ransomware, and data breaches.</p>
+    <p>The platform uses gamification features such as points, badges, achievements, and leaderboards to maintain student engagement and motivation throughout the learning experience. Instructors can manage scenarios, monitor individual and class-wide student progress, review investigation reports, and evaluate learning outcomes through a centralized management dashboard.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Proposed Solution &amp; Technical Background</p>
+    <p>Cybersecurity encompasses the protection of computer systems and data from threats such as phishing, malware, ransomware, and unauthorized access. Simulation-based learning provides a controlled environment where students can safely practice cybercrime investigation without the risks associated with real systems. Combined with gamification elements — points, badges, and progression levels — simulation learning improves engagement, critical thinking, and cybercrime detection competency.</p>
+    <p>The proposed Cyber Investigator system follows an integrated architecture combining cybersecurity concepts, digital forensic investigation techniques, cybercrime detection workflows, and gamification technologies. Players interact with simulated cyber incidents, collect digital evidence, analyze suspicious activities, identify threat types, and generate investigation reports. Scores and feedback are provided based on performance to assess learning outcomes and cybersecurity competency development.</p>
     <div class="feat-grid">
       <div>Realistic cybercrime scenarios</div>
-      <div>Digital evidence analysis</div>
+      <div>Digital evidence collection &amp; analysis</div>
       <div>System log investigation</div>
       <div>Points, badges &amp; achievements</div>
       <div>Leaderboards &amp; rankings</div>
@@ -486,7 +295,7 @@ footer {
   </div>
 
   <div class="card">
-    <p class="card-title">Investigation Flow</p>
+    <p class="card-title">System Architecture — Investigation Flow</p>
     <div class="flow">
       <div class="flow-step">① Cybersecurity Incident Scenario</div>
       <div class="flow-arrow">→</div>
@@ -499,7 +308,7 @@ footer {
       <div class="flow-step">⑤ Investigation Report</div>
       <div class="flow-arrow">→</div>
       <div class="flow-step">⑥ Scoring &amp; Feedback</div>
-      <div class="flow-result">→ Enhanced Cybersecurity Awareness &amp; Skills</div>
+      <div class="flow-result">→ Enhanced Cybersecurity Awareness &amp; Detection Skills</div>
     </div>
   </div>
 
@@ -507,8 +316,8 @@ footer {
     <div class="card">
       <p class="card-title">Stakeholders</p>
       <ul>
-        <li><b>Students</b> — safe, hands-on cybercrime investigation practice</li>
-        <li><b>Instructors</b> — scenario management, progress monitoring</li>
+        <li><b>Students</b> — safe, hands-on cybercrime investigation experience</li>
+        <li><b>Instructors</b> — scenario management, progress monitoring &amp; evaluation</li>
         <li><b>Educational Institutions</b> — improved cybersecurity readiness</li>
         <li><b>Future Researchers</b> — reference for simulation-based security edtech</li>
       </ul>
@@ -518,72 +327,61 @@ footer {
       <ul class="stack-list">
         <li><span>Domain</span><b>Cybersecurity &amp; Digital Forensics</b></li>
         <li><span>Approach</span><b>Simulation-Based Learning</b></li>
-        <li><span>Engagement</span><b>Gamification (points, badges, levels)</b></li>
+        <li><span>Engagement</span><b>Gamification — points, badges, levels</b></li>
         <li><span>Platform</span><b>Web-Based Application</b></li>
-        <li><span>Threats</span><b>Phishing, Malware, Ransomware, Data Breaches</b></li>
+        <li><span>Threats Covered</span><b>Phishing, Malware, Ransomware, Data Breaches</b></li>
       </ul>
     </div>
   </div>
 
   <div class="card">
-    <p class="card-title">Design Thinking</p>
-    <p><b>Empathize:</b> Students studying cybersecurity receive mostly theoretical instruction with little opportunity to practice real investigation workflows. Without hands-on experience in identifying threats, analyzing logs, and handling digital evidence, learners are underprepared for actual cybersecurity roles.</p>
-    <p><b>Define:</b> Cyber Investigator is a web-based educational platform using interactive simulations and gamification to teach cybersecurity concepts and cybercrime investigation techniques in a safe learning environment.</p>
-    <p><b>Ideate:</b> A web-based simulation game where students solve cybercrime cases as cyber investigators — collecting evidence, analyzing threats, and generating investigation reports. Points, badges, levels, and leaderboards drive engagement while instructors manage scenarios and review performance through a centralized dashboard.</p>
+    <p class="card-title">Empathize · Define · Ideate</p>
+    <p><b>Empathize:</b> Students studying cybersecurity receive mostly theoretical instruction with little opportunity to practice real investigation workflows. Without hands-on experience in identifying threats, analyzing system logs, and handling digital evidence, learners graduate underprepared for actual cybersecurity roles. Instructors also lack interactive tools to assign realistic scenarios and assess practical cybersecurity competencies.</p>
+    <p><b>Define:</b> Cyber Investigator is a web-based educational simulation game that provides students with an interactive and safe environment to practice cybersecurity awareness and cybercrime detection skills through realistic scenarios, digital forensic analysis, and gamified learning experiences.</p>
+    <p><b>Ideate:</b> A web-based simulation game where students solve cybercrime cases as cyber investigators — collecting and analyzing evidence, identifying threat types, and generating investigation reports. Points, badges, levels, and leaderboards drive engagement and motivation. Instructors manage scenarios, monitor student performance, and evaluate outcomes through a centralized dashboard, making practical cybersecurity education both accessible and effective.</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════════════════
      CONCEPT 4 — Cemora
-═══════════════════════════════════════ -->
+══════════════════════════════════════════════════════ -->
 <section class="panel" id="c4">
   <div class="concept-head">
-    <span class="concept-tag">Concept 04 · Cemetery Management · GIS &amp; Relationship Visualization</span>
-    <h2>Cemora: A Web and Mobile-Based Grid-Structured Multi-Cemetery Mapping and Family Relationship Visualization System with Data Verification</h2>
-    <p class="concept-subtitle">For Efficient Grave Location and Record Management</p>
+    <span class="concept-tag">Concept 04 · Cemetery Management · GIS · Relationship Visualization</span>
+    <h2>Cemora: A Web and Mobile-Based Grid-Structured Multi-Cemetery Mapping and Family Relationship Visualization System with Data Verification for Efficient Grave Location and Record Management</h2>
+    <p class="concept-subtitle">Applied Research · System Development</p>
   </div>
 
   <div class="card">
-    <p class="card-title">Problem</p>
-    <p>Many cemeteries under local government units rely on paper logs, handwritten maps, and caretaker assistance. Records are often incomplete, inconsistent, or unverified — missing plot numbers, incorrect locations, and outdated data. Visitors struggle to locate graves independently, especially during crowded occasions like All Souls' Day. Families with relatives in different cemeteries have no way to visualize cross-location burial connections.</p>
+    <p class="card-title">Problem Setting</p>
+    <p>Cemeteries serve as important spaces for honoring the deceased and preserving burial records for families and local communities. However, many cemeteries managed by local government units still rely on manual record-keeping systems such as paper logs, handwritten maps, and verbal assistance from caretakers. These traditional methods often lead to inefficiencies in locating graves, updating burial records, and managing cemetery expansion.</p>
+    <p>Cemetery records frequently contain inconsistencies such as missing plot numbers, incorrect locations, and unverified burial information due to years of manual data entry. Existing systems also do not support cross-cemetery family relationship tracking, limiting the ability to visualize complete family burial connections across multiple locations. During peak visitation periods such as All Souls' Day, these issues cause significant delays and emotional stress for families.</p>
     <div class="pills">
       <span class="pill">Manual record-keeping</span>
       <span class="pill">Inconsistent burial data</span>
       <span class="pill">Difficult grave location</span>
       <span class="pill">No cross-cemetery family tracking</span>
       <span class="pill">No data verification system</span>
-    </div>
-  </div>
-
-  <div class="two-col">
-    <div class="card">
-      <p class="card-title">🗺️ Grid-Based Multi-Cemetery Mapping</p>
-      <p style="font-size:.9rem;color:var(--ink2)">Each plot is a coordinate-tagged, clickable box on an interactive grid. The platform manages multiple cemeteries under one system — layouts adapt to expansions without disrupting existing records.</p>
-    </div>
-    <div class="card">
-      <p class="card-title">👨‍👩‍👧 Family Relationship Visualization</p>
-      <p style="font-size:.9rem;color:var(--ink2)">Within a cemetery, related graves are color-coded with linking lines. Across cemeteries, connections appear as linked profile cards with cemetery-switching functionality.</p>
-    </div>
-  </div>
-
-  <div class="two-col">
-    <div class="card">
-      <p class="card-title">📍 Path Visualization</p>
-      <p style="font-size:.9rem;color:var(--ink2)">Highlights a step-by-step route through the grid from the cemetery entrance to the selected grave — letting visitors navigate independently without caretaker assistance.</p>
-    </div>
-    <div class="card">
-      <p class="card-title">✅ Data Verification Module</p>
-      <p style="font-size:.9rem;color:var(--ink2)">Records without plot information are automatically flagged as <em>unverified</em>. Administrators resolve these by assigning correct plots through the interactive map.</p>
+      <span class="pill">No scalable layout management</span>
     </div>
   </div>
 
   <div class="card">
-    <p class="card-title">Key Features</p>
+    <p class="card-title">Project Concept</p>
+    <p>Cemora is a web and mobile-based multi-cemetery mapping and information management system designed to digitize burial records and improve gravesite location services. The system uses a <b>grid-based mapping structure</b> where each cemetery plot is represented as an interactive, clickable box within a digital layout, with each plot assigned a unique coordinate-based identifier.</p>
+    <p>The system introduces three key visualization features: (1) <b>family relationship visualization</b> using color-coded highlights and linking lines for graves within the same cemetery, (2) <b>cross-cemetery linkage</b> through linked profile cards and cemetery-switching functionality for relatives buried in different locations, and (3) <b>path visualization</b> that highlights a guided route from the cemetery entrance to the selected grave through the grid.</p>
+    <p>Additionally, Cemora includes a <b>data verification module</b> that automatically flags records without plot information as unverified, allowing administrators to manually assign the correct plot location through the interactive map interface — ensuring long-term record accuracy and consistency.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Proposed Solution &amp; Technical Background</p>
+    <p>Cemora integrates web technologies, mobile application development, database systems, and grid-based mapping logic to create a scalable cemetery management platform. The system consists of two main components: a <b>web-based administrative system</b> for cemetery personnel and a <b>mobile application</b> for visitors and families.</p>
+    <p>The administrative system allows authorized personnel to manage burial records, assign plots, update cemetery layouts, and handle multiple cemeteries within a single platform. The verification module enables administrators to review and correct incomplete or inaccurate records through the interactive grid map. A centralized database stores all burial records, plot coordinates, family relationship data, and user information — ensuring consistency, scalability, and easy maintenance across multiple cemetery locations.</p>
     <div class="feat-grid">
       <div>Multi-cemetery grid mapping</div>
       <div>Searchable burial records</div>
-      <div>In-cemetery family color-coding</div>
-      <div>Cross-cemetery profile linking</div>
+      <div>In-cemetery family color-coding &amp; linking</div>
+      <div>Cross-cemetery profile linking &amp; switching</div>
       <div>Path highlighting (entrance → grave)</div>
       <div>Unverified record flagging</div>
       <div>Admin verification &amp; plot assignment</div>
@@ -597,10 +395,10 @@ footer {
     <div class="card">
       <p class="card-title">Stakeholders</p>
       <ul>
-        <li><b>Visitors &amp; Families</b> — search, navigate, trace cross-cemetery family burials</li>
-        <li><b>Cemetery Administrators</b> — centralized records &amp; verification tools</li>
+        <li><b>Visitors &amp; Families</b> — search, navigate &amp; trace cross-cemetery family burials</li>
+        <li><b>Cemetery Administrators</b> — centralized multi-cemetery records &amp; verification</li>
         <li><b>Local Government Units</b> — scalable, accurate, consistent burial data</li>
-        <li><b>Future Researchers</b> — reference for grid-mapping &amp; record verification</li>
+        <li><b>Future Researchers</b> — reference for grid-mapping &amp; record verification systems</li>
       </ul>
     </div>
     <div class="card">
@@ -617,10 +415,10 @@ footer {
   </div>
 
   <div class="card">
-    <p class="card-title">Design Thinking</p>
-    <p><b>Empathize:</b> Visitors cannot locate graves without caretaker help, especially during peak occasions. Burial records are frequently incomplete due to years of manual entry. Families with relatives in different cemeteries cannot trace or visualize those connections. Administrators managing multiple cemeteries face high workloads with no centralized tool.</p>
-    <p><b>Define:</b> There is no centralized, interactive, and scalable cemetery management system that supports accurate grave location, efficient multi-cemetery record management, cross-cemetery family relationship tracking, and data verification for incomplete or inconsistent burial records.</p>
-    <p><b>Ideate:</b> Cemora — a grid-based multi-cemetery platform where each plot is a searchable, coordinate-tagged node. Family connections appear within a cemetery via color-coded links and across cemeteries via linked profiles. Path visualization guides visitors from entrance to grave. A verification module flags unverified records for admin correction, all managed from one web admin panel with a companion mobile app.</p>
+    <p class="card-title">Empathize · Define · Ideate</p>
+    <p><b>Empathize:</b> Visitors cannot locate graves independently without caretaker assistance, especially during crowded occasions like All Souls' Day. Burial records are frequently incomplete or inconsistent due to years of manual data entry. Families with relatives buried across different cemeteries have no system to visualize or trace those connections. Administrators managing multiple cemeteries face high workloads with no centralized tool, making record accuracy and layout management increasingly difficult over time.</p>
+    <p><b>Define:</b> The primary problem is the lack of a centralized, interactive, and scalable cemetery management system that supports efficient grave location, accurate multi-cemetery record management, cross-cemetery family relationship tracking, and data verification for incomplete or inconsistent burial records.</p>
+    <p><b>Ideate:</b> Cemora — a grid-based multi-cemetery platform where each plot is a searchable, coordinate-tagged, clickable node with complete burial data. Family connections are visualized within a cemetery via color-coded highlights and linking lines, and across cemeteries via linked profile cards with cemetery-switching functionality. Path visualization guides visitors from the entrance to the selected grave. A verification module automatically flags incomplete records for administrator correction through the interactive map. All cemeteries are managed from a single web admin panel, with a companion mobile app for visitors.</p>
   </div>
 </section>
 
