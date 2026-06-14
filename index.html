@@ -225,7 +225,7 @@
 <nav>
   <button class="active" data-target="c1">Concept 1 · AgriMarket</button>
   <button data-target="c2">Concept 2 · GeoVision</button>
-  <button data-target="c4">Concept 4 · EternalMap</button>
+  <button data-target="c4">Concept 4 · Cemora</button>
 </nav>
 
 <main>
@@ -369,26 +369,57 @@
   <!-- CONCEPT 4 -->
   <section class="panel" id="c4">
     <div class="concept-head">
-      <span class="tag">Concept 04 · GIS · Public Service Information System</span>
-      <h2>EternalMap</h2>
-      <p class="subtitle">A web and mobile-based cemetery mapping &amp; grave information management system for LGUs and cemetery administrators</p>
+      <span class="tag">Concept 04 · Cemetery Management · GIS &amp; Relationship Visualization</span>
+      <h2>Cemora</h2>
+      <p class="subtitle">A Web and Mobile-Based Grid-Structured Cemetery Mapping and Family Relationship Visualization System for Efficient Grave Location and Record Management</p>
     </div>
 
     <section class="card">
       <h3>Problem</h3>
-      <p>Many cemeteries in the Partido district rely on manual record-keeping — paper logbooks and physical maps — making it hard to manage burial records, track plot occupancy, and locate gravesites. Visitors often struggle to find graves, especially during occasions like All Souls' Day, due to outdated maps and lack of signage.</p>
+      <p>Many cemeteries, especially under local government units, rely on paper documents, logbooks, and static maps for burial record-keeping. These manual systems make it difficult to locate graves, update records, and manage cemetery expansion. Visitors — particularly during crowded occasions like All Souls' Day — experience significant delays and emotional stress when trying to find specific gravesites, often relying solely on caretakers for assistance.</p>
+      <div class="pill-row">
+        <span class="pill">Manual record-keeping</span>
+        <span class="pill">No interactive map</span>
+        <span class="pill">Difficult grave location</span>
+        <span class="pill">No family relationship view</span>
+        <span class="pill">Unscalable layouts</span>
+      </div>
     </section>
 
     <section class="card">
-      <h3>Proposed Solution</h3>
-      <p>An interactive digital cemetery map letting visitors search for deceased individuals and view exact plot locations, with a mobile app for navigation. Administrators get a web platform to manage burial records, register new burials, update plot info, monitor occupancy, and generate reports — built on GIS mapping technologies.</p>
+      <h3>Proposed Solution — What Makes Cemora Unique</h3>
+      <p>Cemora digitizes cemetery management through a <b>grid-based mapping structure</b> where each plot is an interactive box with its own coordinate identifier. Three standout features differentiate it from a basic mapping system:</p>
+      <div class="two-col" style="margin-top:12px;">
+        <div style="background:rgba(51,82,62,.06);border:1px solid var(--line);border-radius:4px;padding:14px 16px;">
+          <b style="color:var(--green-deep);display:block;margin-bottom:6px;">🗺️ Grid-Based Plot Mapping</b>
+          Each plot has a unique coordinate and clickable box on the digital grid. Cemetery expansions and relocations don't affect existing records — the grid adapts without data loss.
+        </div>
+        <div style="background:rgba(200,146,58,.07);border:1px solid var(--line);border-radius:4px;padding:14px 16px;">
+          <b style="color:var(--green-deep);display:block;margin-bottom:6px;">👨‍👩‍👧 Family Relationship Visualization</b>
+          Selecting a grave highlights related family members on the map using color-coded overlays and linking lines — showing burial groupings at a glance.
+        </div>
+        <div style="background:rgba(51,82,62,.06);border:1px solid var(--line);border-radius:4px;padding:14px 16px;">
+          <b style="color:var(--green-deep);display:block;margin-bottom:6px;">📍 Path Visualization</b>
+          Highlights a guided route from the cemetery entrance to the selected grave through the grid, helping visitors navigate unfamiliar layouts independently.
+        </div>
+        <div style="background:rgba(200,146,58,.07);border:1px solid var(--line);border-radius:4px;padding:14px 16px;">
+          <b style="color:var(--green-deep);display:block;margin-bottom:6px;">🗄️ Centralized Admin System</b>
+          Web-based platform for adding, updating, and managing burial records, assigning plots, and modifying the cemetery layout when expansion occurs.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Key Features</h3>
       <div class="module-grid">
-        <div>Interactive digital cemetery map</div>
-        <div>Gravesite search</div>
-        <div>Navigation assistance</div>
-        <div>Burial records management</div>
-        <div>Plot occupancy monitoring</div>
-        <div>Admin reporting tools</div>
+        <div>Coordinate-based grid cemetery map</div>
+        <div>Searchable burial records</div>
+        <div>Family relationship color-coding &amp; linking</div>
+        <div>Path highlighting (entrance → grave)</div>
+        <div>Plot assignment &amp; occupancy management</div>
+        <div>Cemetery layout expansion support</div>
+        <div>Mobile app for visitors</div>
+        <div>Web admin panel for administrators</div>
       </div>
     </section>
 
@@ -396,10 +427,10 @@
       <section class="card">
         <h3>Stakeholders</h3>
         <ul>
-          <li><b>Visitors &amp; Families</b> — locate graves quickly via map &amp; search</li>
-          <li><b>Cemetery Administrators</b> — streamlined record &amp; plot management</li>
-          <li><b>Local Government Units</b> — organized burial records, better governance</li>
-          <li><b>Future Researchers</b> — reference for GIS-based public records systems</li>
+          <li><b>Visitors &amp; Families</b> — search &amp; navigate to graves independently</li>
+          <li><b>Cemetery Administrators</b> — digital record management &amp; layout control</li>
+          <li><b>Local Government Units</b> — scalable, organized cemetery data</li>
+          <li><b>Future Researchers</b> — reference for grid-mapping &amp; relationship visualization systems</li>
         </ul>
       </section>
       <section class="card">
@@ -408,17 +439,18 @@
           <li><span>Mobile</span><b>Flutter</b></li>
           <li><span>Web</span><b>React.js / Next.js</b></li>
           <li><span>Backend</span><b>Node.js</b></li>
-          <li><span>Database</span><b>PostgreSQL / MySQL</b></li>
-          <li><span>Mapping</span><b>Google Maps API / Leaflet</b></li>
+          <li><span>Database</span><b>MySQL / PostgreSQL</b></li>
+          <li><span>Mapping</span><b>Leaflet / Google Maps API (optional)</b></li>
+          <li><span>Version Control</span><b>Git &amp; GitHub</b></li>
         </ul>
       </section>
     </div>
 
     <section class="card">
       <h3>Empathize → Define → Ideate</h3>
-      <p><b>Empathize:</b> Visitors waste time searching for gravesites in large cemeteries with poor signage; administrators struggle to maintain accurate records and track available plots manually.</p>
-      <p><b>Define:</b> Lack of a centralized, interactive cemetery management system for efficient burial record management and accurate gravesite location services.</p>
-      <p><b>Ideate:</b> EternalMap — an interactive map for searching deceased individuals and locating plots, paired with admin tools for record management, occupancy monitoring, and report generation, integrating GIS and mobile accessibility.</p>
+      <p><b>Empathize:</b> Visitors struggle to locate graves in large cemeteries with outdated maps and no signage — the problem intensifies during All Souls' Day. Administrators find it hard to manage burial records and track plot availability manually. There is no way to visualize family burial groupings or guide visitors through the cemetery layout.</p>
+      <p><b>Define:</b> There is no centralized and interactive cemetery mapping system that enables efficient grave location, scalable record management, and visualization of family relationships between burial plots.</p>
+      <p><b>Ideate:</b> Cemora — a grid-structured cemetery map where each plot is a searchable, clickable node with burial data. Family connections are visualized with color-coded highlights and linking lines. A path visualization feature guides visitors from the entrance to the selected grave. Administrators manage the entire system — records, plots, and layouts — through a dedicated web panel, while visitors access everything through a mobile app.</p>
     </section>
   </section>
 
