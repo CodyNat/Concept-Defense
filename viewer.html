@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geora — 3D Specimen Viewer</title>
+<style>
+:root {
+  --green: #2D4A38; --green-mid: #3D6450; --gold: #B8822E;
+  --bg: #18201C; --surface: #1E2820; --border: #2A342E;
+  --text: #D8D4CC; --text2: #7A8880;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; user-select: none; }
+
+/* TOPBAR */
+.topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 8px 14px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+.topbar-brand { font-family: 'Courier New', monospace; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+.topbar-sep { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+.btn { background: var(--green); color: #fff; border: none; border-radius: 5px; padding: 7px 14px; font-family: 'Courier New', monospace; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: background .15s; white-space: nowrap; }
+.btn:hover { background: var(--green-mid); }
+.btn-gold { background: var(--gold); }
+.btn-gold:hover { background: #a06e20; }
+.btn-sm { padding: 5px 10px; font-size: .65rem; }
+#file-input { display: none; }
+#mtl-input { display: none; }
+.filename { font-family: 'Courier New', monospace; font-size: .7rem; color: var(--text2); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* CANVAS */
+.canvas-wrap { flex: 1; position: relative; overflow: hidden; }
+#viewer-canvas { width: 100%; height: 100%; display: block; cursor: grab; }
+#viewer-canvas:active { cursor: grabbing; }
+
+/* PLACEHOLDER */
+#placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: var(--text2); pointer-events: none; }
+#placeholder svg { opacity: .25; }
+#placeholder p { font-family: 'Courier New', monospace; font-size: .78rem; letter-spacing: .08em; text-align: center; line-height: 2.2; opacity: .7; }
+
+/* LOADING */
+#loading { display: none; position: absolute; inset: 0; background: rgba(24,32,28,.85); align-items: center; justify-content: center; flex-direction: column; gap: 14px; }
+#loading.show { display: flex; }
+.spinner { width: 38px; height: 38px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#loading p { font-family: 'Courier New', monospace; font-size: .75rem; color: var(--text2); letter-spacing: .1em; }
+
+/* SIDEBAR CONTROLS */
+.sidebar {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(30,40,32,.92);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  min-width: 160px;
+  backdrop-filter: blur(6px);
+  font-family: 'Courier New', monospace;
+  font-size: .68rem;
+  letter-spacing: .06em;
+}
+.sidebar-label { color: var(--gold); text-transform: uppercase; letter-spacing: .15em; margin-bottom: 2px; font-size: .6rem; }
+.slider-row { display: flex; flex-direction: column; gap: 4px; }
+.slider-row input[type=range] { width: 100%; accent-color: var(--gold); height: 3px; cursor: pointer; }
+.slider-val { color: var(--text2); font-size: .65rem; text-align: right; }
+.check-row { display: flex; align-items: center; gap: 7px; cursor: pointer; color: var(--text2); }
+.check-row input { accent-color: var(--gold); cursor: pointer; }
+
+/* ERROR */
+#error-msg { display: none; position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); background: #5a1f1f; border: 1px solid #8a3030; color: #f4b4b4; padding: 10px 18px; border-radius: 6px; font-family: 'Courier New', monospace; font-size: .72rem; letter-spacing: .05em; max-width: 360px; text-align: center; z-index: 10; }
+
+/* STATUSBAR */
+.statusbar { background: var(--surface); border-top: 1px solid var(--border); padding: 5px 14px; display: flex; align-items: center; gap: 18px; flex-shrink: 0; font-family: 'Courier New', monospace; font-size: .65rem; color: var(--text2); letter-spacing: .05em; }
+#status-msg { color: var(--gold); }
+.ctrl-hints { display: flex; gap: 12px; flex-wrap: wrap; }
+.hint { display: flex; gap: 4px; align-items: center; }
+.key { background: var(--border); border-radius: 3px; padding: 1px 5px; font-size: .6rem; color: var(--text); }
+
+.back-link { color: var(--text2); text-decoration: none; font-family: 'Courier New', monospace; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; display: flex; align-items: center; gap: 5px; transition: color .15s; white-space: nowrap; }
+.back-link:hover { color: var(--gold); }
+
+/* Drop highlight */
+.canvas-wrap.dragover::after { content: 'DROP FILE HERE'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(184,130,46,.12); border: 2px dashed var(--gold); border-radius: 4px; color: var(--gold); font-family: 'Courier New', monospace; font-size: 1.2rem; letter-spacing: .2em; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="back-link">← Back</a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-brand">Geora · 3D Specimen Viewer</span>
+  <div class="topbar-sep"></div>
+  <input type="file" id="file-input" accept=".obj,.glb,.gltf">
+  <input type="file" id="mtl-input" accept=".mtl">
+  <button class="btn btn-gold" onclick="document.getElementById('file-input').click()">Load OBJ / GLB</button>
+  <button class="btn btn-sm" id="mtl-btn" onclick="document.getElementById('mtl-input').click()" title="Load MTL material file for OBJ" style="display:none">+ MTL</button>
+  <span class="filename" id="filename-label">No file loaded</span>
+  <div style="margin-left:auto;display:flex;gap:8px">
+    <button class="btn btn-sm" id="reset-btn">Reset View</button>
+  </div>
+</div>
+
+<div class="canvas-wrap" id="canvas-wrap">
+  <canvas id="viewer-canvas"></canvas>
+
+  <div id="placeholder">
+    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+    </svg>
+    <p>
+      Click <b style="color:var(--gold)">Load OBJ / GLB</b> or drag &amp; drop a file here<br>
+      Supports: .OBJ &nbsp;·&nbsp; .GLB &nbsp;·&nbsp; .GLTF<br>
+      <span style="opacity:.5;font-size:.65rem">OBJ from Meshroom / 3DF Zephyr: load the .OBJ + its .MTL file</span>
+    </p>
+  </div>
+
+  <div id="loading"><div class="spinner"></div><p id="loading-text">Loading model...</p></div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar" style="display:none">
+    <div>
+      <div class="sidebar-label">Exposure</div>
+      <div class="slider-row">
+        <input type="range" id="sl-exposure" min="0.2" max="3" step="0.05" value="1.0">
+        <span class="slider-val" id="val-exposure">1.0</span>
+      </div>
+    </div>
+    <div>
+      <div class="sidebar-label">Ambient Light</div>
+      <div class="slider-row">
+        <input type="range" id="sl-ambient" min="0" max="4" step="0.1" value="2.5">
+        <span class="slider-val" id="val-ambient">2.5</span>
+      </div>
+    </div>
+    <div>
+      <div class="sidebar-label">Sun Light</div>
+      <div class="slider-row">
+        <input type="range" id="sl-sun" min="0" max="4" step="0.1" value="1.5">
+        <span class="slider-val" id="val-sun">1.5</span>
+      </div>
+    </div>
+    <div>
+      <div class="sidebar-label">Vertex Colors</div>
+      <label class="check-row">
+        <input type="checkbox" id="chk-vcol" checked>
+        <span>Show if available</span>
+      </label>
+    </div>
+    <div>
+      <div class="sidebar-label">Wire Frame</div>
+      <label class="check-row">
+        <input type="checkbox" id="chk-wire">
+        <span>Overlay</span>
+      </label>
+    </div>
+    <div>
+      <div class="sidebar-label">Auto Rotate</div>
+      <label class="check-row">
+        <input type="checkbox" id="chk-rotate">
+        <span>Spin model</span>
+      </label>
+    </div>
+  </div>
+
+  <div id="error-msg"></div>
+</div>
+
+<div class="statusbar">
+  <span id="status-msg">Ready — load a 3D specimen to begin</span>
+  <div class="ctrl-hints">
+    <div class="hint"><span class="key">Drag</span>Rotate</div>
+    <div class="hint"><span class="key">Scroll</span>Zoom</div>
+    <div class="hint"><span class="key">Right-drag</span>Pan</div>
+    <div class="hint"><span class="key">R</span>Reset</div>
+  </div>
+  <span id="poly-count" style="margin-left:auto"></span>
+</div>
+
+<!-- Three.js + loaders -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
+<script>
+
+// ── DOM refs ──
+const canvas    = document.getElementById('viewer-canvas');
+const placeholder = document.getElementById('placeholder');
+const loadingEl = document.getElementById('loading');
+const loadingText = document.getElementById('loading-text');
+const errorEl   = document.getElementById('error-msg');
+const statusMsg = document.getElementById('status-msg');
+const polyCount = document.getElementById('poly-count');
+const filenameLabel = document.getElementById('filename-label');
+const sidebar   = document.getElementById('sidebar');
+const canvasWrap = document.getElementById('canvas-wrap');
+const mtlBtn    = document.getElementById('mtl-btn');
+
+// ── Renderer ──
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping   = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+
+// ── Scene ──
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x18201c);
+
+// Subtle ground grid
+const gridHelper = new THREE.GridHelper(10, 20, 0x2a342e, 0x222c26);
+gridHelper.position.y = -1.1;
+scene.add(gridHelper);
+
+// ── Camera ──
+const camera = new THREE.PerspectiveCamera(40, 1, 0.0001, 2000);
+camera.position.set(0, 0, 3);
+
+// ── Lights — bright, neutral, photogrammetry-friendly ──
+const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
+scene.add(ambientLight);
+
+const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
+sunLight.position.set(4, 8, 5);
+sunLight.castShadow = true;
+scene.add(sunLight);
+
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+fillLight.position.set(-4, 2, -3);
+scene.add(fillLight);
+
+const bottomLight = new THREE.DirectionalLight(0xffffff, 0.5);
+bottomLight.position.set(0, -6, 2);
+scene.add(bottomLight);
+
+const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
+backLight.position.set(0, 3, -6);
+scene.add(backLight);
+
+// ── Orbit state ──
+let isDragging = false, isRightDrag = false;
+let lastX = 0, lastY = 0;
+let rotX = -10, rotY = 20, panX = 0, panY = 0, zoom = 3;
+let autoRotate = false;
+let wireframe = false;
+let showVertexColors = true;
+let currentModel = null;
+let pendingMtlText = null;
+let lastObjText  = null;
+const pivot = new THREE.Group();
+scene.add(pivot);
+
+// ── Controls ──
+canvas.addEventListener('mousedown', e => {
+  isDragging = true; isRightDrag = e.button === 2;
+  lastX = e.clientX; lastY = e.clientY;
+  e.preventDefault();
+});
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+window.addEventListener('mouseup', () => isDragging = false);
+window.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const dx = e.clientX - lastX, dy = e.clientY - lastY;
+  lastX = e.clientX; lastY = e.clientY;
+  if (isRightDrag) { panX += dx * 0.004; panY -= dy * 0.004; }
+  else { rotY += dx * 0.5; rotX += dy * 0.5; rotX = Math.max(-89, Math.min(89, rotX)); }
+});
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  zoom = Math.max(0.05, zoom * (1 + e.deltaY * 0.0008));
+}, { passive: false });
+
+// Touch
+let lastTouchDist = 0, lastTouchX = 0, lastTouchY = 0;
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) { isDragging = true; lastTouchX = e.touches[0].clientX; lastTouchY = e.touches[0].clientY; }
+  if (e.touches.length === 2) lastTouchDist = Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+}, { passive: true });
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (e.touches.length === 1 && isDragging) {
+    const dx = e.touches[0].clientX - lastTouchX, dy = e.touches[0].clientY - lastTouchY;
+    lastTouchX = e.touches[0].clientX; lastTouchY = e.touches[0].clientY;
+    rotY += dx * 0.5; rotX += dy * 0.5; rotX = Math.max(-89, Math.min(89, rotX));
+  }
+  if (e.touches.length === 2) {
+    const d = Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+    zoom = Math.max(0.05, zoom * (lastTouchDist / d));
+    lastTouchDist = d;
+  }
+}, { passive: false });
+canvas.addEventListener('touchend', () => isDragging = false, { passive: true });
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'r' || e.key === 'R') resetView();
+});
+
+function resetView() { rotX = -10; rotY = 20; panX = 0; panY = 0; zoom = 2.8; }
+
+// ── Sidebar sliders ──
+function bindSlider(id, valId, onChange) {
+  const el = document.getElementById(id);
+  const vl = document.getElementById(valId);
+  el.addEventListener('input', () => { vl.textContent = parseFloat(el.value).toFixed(1); onChange(parseFloat(el.value)); });
+}
+bindSlider('sl-exposure', 'val-exposure', v => renderer.toneMappingExposure = v);
+bindSlider('sl-ambient',  'val-ambient',  v => ambientLight.intensity = v);
+bindSlider('sl-sun',      'val-sun',      v => sunLight.intensity = v);
+
+document.getElementById('chk-rotate').addEventListener('change', e => autoRotate = e.target.checked);
+document.getElementById('chk-wire').addEventListener('change', e => {
+  wireframe = e.target.checked;
+  if (currentModel) currentModel.traverse(c => { if (c.isMesh) c.material.wireframe = wireframe; });
+});
+document.getElementById('chk-vcol').addEventListener('change', e => {
+  showVertexColors = e.target.checked;
+  if (lastObjText) rebuildOBJ(lastObjText, pendingMtlText);
+});
+document.getElementById('reset-btn').addEventListener('click', resetView);
+
+// ── Helpers ──
+function showError(msg) {
+  errorEl.textContent = msg; errorEl.style.display = 'block';
+  setTimeout(() => errorEl.style.display = 'none', 6000);
+}
+
+function countTris(obj) {
+  let t = 0;
+  obj.traverse(c => {
+    if (!c.isMesh) return;
+    const g = c.geometry;
+    t += g.index ? g.index.count / 3 : g.attributes.position.count / 3;
+  });
+  return Math.round(t);
+}
+
+function fitModel(obj) {
+  const box = new THREE.Box3().setFromObject(obj);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const maxDim = Math.max(size.x, size.y, size.z);
+  const s = 2 / maxDim;
+  obj.scale.setScalar(s);
+  obj.position.copy(center.multiplyScalar(-s));
+  // drop grid to model bottom
+  gridHelper.position.y = -size.y * s * 0.5 - 0.02;
+  zoom = 2.8; rotX = -10; rotY = 20; panX = 0; panY = 0;
+}
+
+function addModel(obj) {
+  if (currentModel) { pivot.remove(currentModel); currentModel = null; }
+  fitModel(obj);
+  pivot.add(obj);
+  currentModel = obj;
+  loadingEl.classList.remove('show');
+  sidebar.style.display = '';
+  polyCount.textContent = countTris(obj).toLocaleString() + ' triangles';
+}
+
+// ── Apply vertex colors if present ──
+function applyVertexColors(obj) {
+  obj.traverse(c => {
+    if (!c.isMesh) return;
+    const g = c.geometry;
+    if (g.attributes.color && showVertexColors) {
+      // Photogrammetry OBJs bake color into vertex color attribute
+      c.material = new THREE.MeshStandardMaterial({
+        vertexColors: true,
+        roughness: 0.85,
+        metalness: 0.0,
+        wireframe
+      });
+    } else {
+      // No vertex colors — keep existing material or use neutral
+      if (!c.material || c.material.type === 'MeshPhongMaterial') {
+        // keep mtl-loaded material
+      } else {
+        c.material.roughness = 0.85;
+        c.material.metalness = 0.0;
+      }
+      c.material.wireframe = wireframe;
+    }
+    c.castShadow = true;
+    c.receiveShadow = true;
+  });
+}
+
+// ── OBJ rebuild (with vertex colors) ──
+function rebuildOBJ(text, mtlText) {
+  const loader = new THREE.OBJLoader();
+  if (mtlText) {
+    const mtlLoader = new THREE.MTLLoader();
+    const mtl = mtlLoader.parse(mtlText, '');
+    mtl.preload();
+    loader.setMaterials(mtl);
+  }
+  const obj = loader.parse(text);
+  applyVertexColors(obj);
+  addModel(obj);
+}
+
+// ── File loading ──
+let pendingObjText = null;
+
+function loadModel(file) {
+  const name = file.name;
+  filenameLabel.textContent = name;
+  placeholder.style.display = 'none';
+  loadingEl.classList.add('show');
+  loadingText.textContent = 'Loading ' + name + '…';
+  statusMsg.textContent = 'Loading…';
+  errorEl.style.display = 'none';
+
+  const ext = name.split('.').pop().toLowerCase();
+
+  if (ext === 'obj') {
+    mtlBtn.style.display = '';
+    const reader = new FileReader();
+    reader.onload = e => {
+      lastObjText = e.target.result;
+      rebuildOBJ(lastObjText, pendingMtlText);
+      statusMsg.textContent = 'Loaded: ' + name + (pendingMtlText ? ' (with MTL)' : ' — load .MTL for textures/colors');
+    };
+    reader.onerror = () => { loadingEl.classList.remove('show'); showError('Could not read file.'); };
+    reader.readAsText(file);
+
+  } else if (ext === 'glb' || ext === 'gltf') {
+    mtlBtn.style.display = 'none';
+    const url = URL.createObjectURL(file);
+    const loader = new THREE.GLTFLoader();
+    loader.load(url, gltf => {
+      const obj = gltf.scene;
+      // GLB from photogrammetry already has baked textures — preserve them
+      obj.traverse(c => {
+        if (c.isMesh) {
+          if (c.material) {
+            // Ensure encoding is correct for baked texture
+            if (c.material.map) c.material.map.encoding = THREE.sRGBEncoding;
+            c.material.roughness = Math.max(c.material.roughness ?? 0.85, 0.6);
+            c.material.metalness = 0;
+            c.material.wireframe = wireframe;
+          }
+          c.castShadow = true; c.receiveShadow = true;
+        }
+      });
+      addModel(obj);
+      statusMsg.textContent = 'Loaded: ' + name;
+      URL.revokeObjectURL(url);
+    }, xhr => {
+      if (xhr.total) loadingText.textContent = 'Loading… ' + Math.round(xhr.loaded/xhr.total*100) + '%';
+    }, err => {
+      loadingEl.classList.remove('show');
+      showError('Failed to load GLB/GLTF. File may be corrupt or use unsupported extensions.');
+      statusMsg.textContent = 'Error'; URL.revokeObjectURL(url);
+    });
+  } else {
+    loadingEl.classList.remove('show');
+    showError('Unsupported format. Use .OBJ, .GLB, or .GLTF');
+  }
+}
+
+function loadMTL(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    pendingMtlText = e.target.result;
+    if (lastObjText) {
+      loadingEl.classList.add('show');
+      loadingText.textContent = 'Applying MTL…';
+      rebuildOBJ(lastObjText, pendingMtlText);
+      statusMsg.textContent = 'MTL applied: ' + file.name;
+    }
+  };
+  reader.readAsText(file);
+}
+
+document.getElementById('file-input').addEventListener('change', e => { if (e.target.files[0]) { pendingMtlText = null; lastObjText = null; loadModel(e.target.files[0]); } });
+document.getElementById('mtl-input').addEventListener('change', e => { if (e.target.files[0]) loadMTL(e.target.files[0]); });
+
+// Drag & drop — accept both OBJ and MTL simultaneously
+canvasWrap.addEventListener('dragover', e => { e.preventDefault(); canvasWrap.classList.add('dragover'); });
+canvasWrap.addEventListener('dragleave', () => canvasWrap.classList.remove('dragover'));
+canvasWrap.addEventListener('drop', e => {
+  e.preventDefault(); canvasWrap.classList.remove('dragover');
+  const files = Array.from(e.dataTransfer.files);
+  const obj = files.find(f => /\.obj$/i.test(f.name));
+  const mtl = files.find(f => /\.mtl$/i.test(f.name));
+  const glb = files.find(f => /\.(glb|gltf)$/i.test(f.name));
+  if (mtl) { const r = new FileReader(); r.onload = ev => { pendingMtlText = ev.target.result; }; r.readAsText(mtl); }
+  if (obj) { pendingMtlText = null; lastObjText = null; loadModel(obj); }
+  else if (glb) loadModel(glb);
+});
+
+// ── Render loop ──
+function resize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (canvas.width !== w || canvas.height !== h) {
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+}
+
+let frame = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  resize();
+  if (autoRotate && !isDragging) rotY += 0.3;
+  pivot.rotation.x = THREE.MathUtils.degToRad(rotX);
+  pivot.rotation.y = THREE.MathUtils.degToRad(rotY);
+  pivot.position.set(panX, panY, 0);
+  camera.position.z = zoom;
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>
