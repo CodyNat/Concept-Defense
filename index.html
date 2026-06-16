@@ -68,6 +68,17 @@ main{max-width:900px;margin:0 auto;padding:40px 20px 80px;}
 .demo-link:hover{background:var(--green-mid);}
 .demo-note{font-size:.78rem;color:var(--ink2);margin-top:8px;font-style:italic;}
 
+/* HW TABLES */
+.hw-section{margin-bottom:14px;}
+.hw-section-title{font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;padding:6px 0 6px 10px;border-left:3px solid var(--gold);}
+.hw-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:4px;}
+.hw-table th{background:var(--green);color:#fff;text-align:left;padding:7px 10px;font-family:'Courier New',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+.hw-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--ink);vertical-align:top;}
+.hw-table tr:last-child td{border-bottom:none;}
+.hw-table tr:nth-child(even) td{background:var(--surface2);}
+.hw-table td:first-child{color:var(--ink2);font-size:.82rem;width:34%;}
+.hw-note{font-size:.78rem;color:var(--ink2);font-style:italic;margin-top:6px;padding-left:2px;}
+
 footer{text-align:center;padding:28px 20px 50px;font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.1em;color:#9A9188;text-transform:uppercase;}
 </style>
 </head>
@@ -162,7 +173,103 @@ footer{text-align:center;padding:28px 20px 50px;font-family:'Courier New',monosp
     <p><b>Empathize:</b> Farmers in the Partido area sell below market value without knowing where demand is highest. They rely on middlemen who take advantage of the information gap. Vendors and traders struggle to locate sufficient suppliers during peak demand periods. The Municipal Agriculture Office lacks centralized data to monitor and support the local agricultural market effectively.</p>
     <p><b>Define:</b> How can a web-based agricultural market information system improve communication and market transparency between farmers, traders, vendors, and agricultural authorities by providing centralized supply–demand information and predictive analytics to support better marketing and pricing decisions in the Partido area?</p>
     <p><b>Ideate:</b> AgriMarket — a centralized web platform with real-time supply and demand posting, a market information dashboard, price monitoring, crop search and filtering, geographic market information, historical records, and ML-based price and demand prediction. All four stakeholder roles interact through a single unified system managed by a designated administrator.</p>
+
+  <div class="card">
+    <p class="card-title">Hardware &amp; Software Requirements</p>
+
+    <div class="two-col">
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Minimum</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i3 (10th Gen) / AMD Ryzen 3</td></tr>
+            <tr><td>RAM</td><td>8 GB</td></tr>
+            <tr><td>Storage</td><td>256 GB SSD</td></tr>
+            <tr><td>Display</td><td>1366 × 768</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Recommended</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i5 (11th Gen) / AMD Ryzen 5</td></tr>
+            <tr><td>RAM</td><td>16 GB</td></tr>
+            <tr><td>Storage</td><td>512 GB SSD</td></tr>
+            <tr><td>Display</td><td>1920 × 1080</td></tr>
+            <tr><td>Internet</td><td>High-Speed Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Server Requirements</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Min / Recommended</th></tr>
+            <tr><td>Processor</td><td>2 vCPU / 4 vCPU</td></tr>
+            <tr><td>RAM</td><td>4 GB / 8 GB</td></tr>
+            <tr><td>Storage</td><td>50 GB SSD / 100 GB SSD</td></tr>
+            <tr><td>OS</td><td>Linux Ubuntu / Ubuntu Server</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">End-User Requirements — Farmers</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Device</td><td>Android Smartphone or equivalent</td></tr>
+            <tr><td>RAM</td><td>2 GB</td></tr>
+            <tr><td>Browser</td><td>Chrome, Firefox, Edge</td></tr>
+            <tr><td>Internet</td><td>Mobile Data or Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">End-User Requirements — Traders &amp; Vendors</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Device</td><td>Smartphone, Tablet, Laptop, or Desktop</td></tr>
+            <tr><td>RAM</td><td>4 GB</td></tr>
+            <tr><td>Browser</td><td>Chrome, Firefox, Edge</td></tr>
+            <tr><td>Internet</td><td>Stable Internet Connection</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">End-User Requirements — Admin &amp; MAO Personnel</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Processor</td><td>Intel Core i3 / AMD Ryzen 3</td></tr>
+            <tr><td>RAM</td><td>4 GB</td></tr>
+            <tr><td>Storage</td><td>128 GB</td></tr>
+            <tr><td>Browser</td><td>Chrome, Firefox, Edge</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Network Requirements</div>
+          <table class="hw-table">
+            <tr><td>Minimum Speed</td><td>5 Mbps</td></tr>
+            <tr><td>Recommended Speed</td><td>20 Mbps or higher</td></tr>
+            <tr><td>Network Type</td><td>Broadband, Fiber, or Mobile Data</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="hw-section" style="margin-top:8px;">
+      <div class="hw-section-title">Development Software</div>
+      <table class="hw-table">
+        <tr><th>Software</th><th>Purpose</th></tr>
+        <tr><td>WAMP Server</td><td>Local development environment (Apache, MySQL, PHP)</td></tr>
+        <tr><td>Laravel (PHP)</td><td>Backend framework</td></tr>
+        <tr><td>MySQL</td><td>Database management</td></tr>
+        <tr><td>HTML, CSS, JavaScript, Bootstrap</td><td>Frontend development</td></tr>
+        <tr><td>Visual Studio Code</td><td>Code editor</td></tr>
+        <tr><td>Git &amp; GitHub</td><td>Version control</td></tr>
+        <tr><td>Postman</td><td>API testing</td></tr>
+      </table>
+    </div>
   </div>
+
 </section>
 
 <!-- ══════════════════════════════════════════════════════
@@ -246,7 +353,103 @@ footer{text-align:center;padding:28px 20px 50px;font-family:'Courier New',monosp
     <p><b>Empathize:</b> Geology students struggle to visualize the three-dimensional structure of rocks and minerals from static two-dimensional materials. Physical specimen access is limited to lab schedules, restricting independent study. Students lack tools to compare multiple specimens side by side and have no structured digital pathway to guide their learning progression. Instructors also need digital tools that support interactive instruction and assessment beyond traditional classroom settings.</p>
     <p><b>Define:</b> The primary problem is the lack of an interactive, accessible, and structured geological learning environment that supports 3D specimen visualization, comparative specimen analysis, guided learning progression, and integrated assessment with progress tracking — specifically designed for geology students of Partido State University.</p>
     <p><b>Ideate:</b> Geora — a web-based platform functioning as both a geological reference library and a virtual learning laboratory. Students freely explore and compare 3D specimens in the library, or enroll in instructor-designed classes with prerequisite-gated learning trees, standard and comparison-based quizzes, and tracked progress. Administrators manage the specimen repository through OBJ and GLB uploads, continuously expanding the digital geological collection available to all users.</p>
+
+  <div class="card">
+    <p class="card-title">Hardware &amp; Software Requirements</p>
+
+    <div class="two-col">
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Minimum</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i5 (8th Gen) / AMD Ryzen 5</td></tr>
+            <tr><td>RAM</td><td>8 GB</td></tr>
+            <tr><td>Storage</td><td>256 GB SSD</td></tr>
+            <tr><td>Graphics</td><td>Integrated Graphics</td></tr>
+            <tr><td>OS</td><td>Windows 10/11, Linux, or macOS</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Recommended</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i7 / AMD Ryzen 7</td></tr>
+            <tr><td>RAM</td><td>16 GB or higher</td></tr>
+            <tr><td>Storage</td><td>512 GB SSD or higher</td></tr>
+            <tr><td>Graphics</td><td>Dedicated GPU (optional but recommended)</td></tr>
+            <tr><td>OS</td><td>Windows 10/11, Linux, or macOS</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">3D Model Generation (Photogrammetry)</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Recommended</th></tr>
+            <tr><td>Processor</td><td>Intel Core i7 / AMD Ryzen 7</td></tr>
+            <tr><td>RAM</td><td>16 GB or higher</td></tr>
+            <tr><td>Storage</td><td>512 GB SSD or higher</td></tr>
+            <tr><td>Graphics</td><td>NVIDIA GPU (CUDA) for Meshroom</td></tr>
+            <tr><td>Software</td><td>3DF Zephyr, Meshroom, or equivalent</td></tr>
+          </table>
+          <p class="hw-note">Meshroom requires a CUDA-enabled NVIDIA GPU. 3DF Zephyr supports CPU-based reconstruction when CUDA hardware is unavailable.</p>
+        </div>
+      </div>
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">Student (User) Requirements</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Processor</td><td>Intel Core i3 / AMD Ryzen 3</td></tr>
+            <tr><td>RAM</td><td>4 GB or higher</td></tr>
+            <tr><td>Storage</td><td>20 GB free disk space</td></tr>
+            <tr><td>Browser</td><td>Chrome, Edge, Firefox (WebGL required)</td></tr>
+            <tr><td>Display</td><td>1366 × 768 or higher</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Instructor (Professor) Requirements</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Processor</td><td>Intel Core i5 / AMD Ryzen 5</td></tr>
+            <tr><td>RAM</td><td>8 GB or higher</td></tr>
+            <tr><td>Storage</td><td>50 GB free disk space</td></tr>
+            <tr><td>Browser</td><td>Chrome, Edge, Firefox (WebGL required)</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Server Requirements</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Min / Recommended</th></tr>
+            <tr><td>Processor</td><td>Dual-Core / Quad-Core CPU</td></tr>
+            <tr><td>RAM</td><td>4 GB / 8 GB or higher</td></tr>
+            <tr><td>Storage</td><td>50 GB SSD / 100 GB SSD</td></tr>
+            <tr><td>Database</td><td>MySQL</td></tr>
+            <tr><td>Web Server</td><td>Apache or Nginx</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="hw-section" style="margin-top:8px;">
+      <div class="hw-section-title">Development Software</div>
+      <table class="hw-table">
+        <tr><th>Software</th><th>Purpose</th></tr>
+        <tr><td>WAMP Server</td><td>Local development environment (Apache, MySQL, PHP)</td></tr>
+        <tr><td>Laravel (PHP)</td><td>Backend framework</td></tr>
+        <tr><td>MySQL</td><td>Database management</td></tr>
+        <tr><td>HTML, CSS, JavaScript, Bootstrap</td><td>Frontend development</td></tr>
+        <tr><td>Three.js</td><td>3D WebGL-based specimen rendering</td></tr>
+        <tr><td>3DF Zephyr / Meshroom</td><td>Photogrammetry &amp; 3D model generation</td></tr>
+        <tr><td>Blender</td><td>3D model cleanup and optimization (optional)</td></tr>
+        <tr><td>Visual Studio Code</td><td>Code editor</td></tr>
+        <tr><td>Git &amp; GitHub</td><td>Version control</td></tr>
+        <tr><td>Postman</td><td>API testing</td></tr>
+      </table>
+    </div>
   </div>
+
 </section>
 
 <!-- ══════════════════════════════════════════════════════
@@ -339,7 +542,97 @@ footer{text-align:center;padding:28px 20px 50px;font-family:'Courier New',monosp
     <p><b>Empathize:</b> Students studying cybersecurity receive mostly theoretical instruction with little opportunity to practice real investigation workflows. Without hands-on experience in identifying threats, analyzing system logs, and handling digital evidence, learners graduate underprepared for actual cybersecurity roles. Instructors also lack interactive tools to assign realistic scenarios and assess practical cybersecurity competencies.</p>
     <p><b>Define:</b> Cyber Investigator is a web-based educational simulation game that provides students with an interactive and safe environment to practice cybersecurity awareness and cybercrime detection skills through realistic scenarios, digital forensic analysis, and gamified learning experiences.</p>
     <p><b>Ideate:</b> A web-based simulation game where students solve cybercrime cases as cyber investigators — collecting and analyzing evidence, identifying threat types, and generating investigation reports. Points, badges, levels, and leaderboards drive engagement and motivation. Instructors manage scenarios, monitor student performance, and evaluate outcomes through a centralized dashboard, making practical cybersecurity education both accessible and effective.</p>
+
+  <div class="card">
+    <p class="card-title">Hardware &amp; Software Requirements</p>
+
+    <div class="two-col">
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Minimum</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i5 (8th Gen) / AMD Ryzen 5</td></tr>
+            <tr><td>RAM</td><td>8 GB</td></tr>
+            <tr><td>Storage</td><td>256 GB SSD</td></tr>
+            <tr><td>Graphics</td><td>Integrated Graphics</td></tr>
+            <tr><td>OS</td><td>Windows 10/11, Linux, or macOS</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Recommended</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i7 / AMD Ryzen 7</td></tr>
+            <tr><td>RAM</td><td>16 GB or higher</td></tr>
+            <tr><td>Storage</td><td>512 GB SSD or higher</td></tr>
+            <tr><td>Graphics</td><td>Dedicated GPU (optional)</td></tr>
+            <tr><td>OS</td><td>Windows 10/11, Linux, or macOS</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Server Requirements</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Min / Recommended</th></tr>
+            <tr><td>Processor</td><td>Dual-Core / Quad-Core CPU</td></tr>
+            <tr><td>RAM</td><td>4 GB / 8 GB or higher</td></tr>
+            <tr><td>Storage</td><td>50 GB SSD / 100 GB SSD</td></tr>
+            <tr><td>Database</td><td>MySQL</td></tr>
+            <tr><td>Web Server</td><td>Apache or Nginx</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">End-User Requirements — Students</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Processor</td><td>Intel Core i3 / AMD Ryzen 3</td></tr>
+            <tr><td>RAM</td><td>4 GB</td></tr>
+            <tr><td>Storage</td><td>20 GB free disk space</td></tr>
+            <tr><td>Browser</td><td>Chrome, Edge, Firefox</td></tr>
+            <tr><td>Display</td><td>1366 × 768 or higher</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">End-User Requirements — Instructors</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Processor</td><td>Intel Core i5 / AMD Ryzen 5</td></tr>
+            <tr><td>RAM</td><td>8 GB</td></tr>
+            <tr><td>Storage</td><td>50 GB free disk space</td></tr>
+            <tr><td>Browser</td><td>Chrome, Edge, Firefox</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Network Requirements</div>
+          <table class="hw-table">
+            <tr><td>Minimum Speed</td><td>5 Mbps</td></tr>
+            <tr><td>Recommended Speed</td><td>20 Mbps or higher</td></tr>
+            <tr><td>Network Type</td><td>Broadband, Fiber, or Mobile Data</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="hw-section" style="margin-top:8px;">
+      <div class="hw-section-title">Development Software</div>
+      <table class="hw-table">
+        <tr><th>Software</th><th>Purpose</th></tr>
+        <tr><td>WAMP Server</td><td>Local development environment (Apache, MySQL, PHP)</td></tr>
+        <tr><td>Laravel (PHP)</td><td>Backend framework</td></tr>
+        <tr><td>MySQL</td><td>Database management</td></tr>
+        <tr><td>HTML, CSS, JavaScript, Bootstrap</td><td>Frontend &amp; game interface development</td></tr>
+        <tr><td>Visual Studio Code</td><td>Code editor</td></tr>
+        <tr><td>Git &amp; GitHub</td><td>Version control</td></tr>
+        <tr><td>Postman</td><td>API testing</td></tr>
+        <tr><td>Overleaf (LaTeX)</td><td>Documentation</td></tr>
+      </table>
+    </div>
   </div>
+
 </section>
 
 <!-- ══════════════════════════════════════════════════════
@@ -419,7 +712,99 @@ footer{text-align:center;padding:28px 20px 50px;font-family:'Courier New',monosp
     <p><b>Empathize:</b> Visitors cannot locate graves independently without caretaker assistance, especially during crowded occasions like All Souls' Day. Burial records are frequently incomplete or inconsistent due to years of manual data entry. Families with relatives buried across different cemeteries have no system to visualize or trace those connections. Administrators managing multiple cemeteries face high workloads with no centralized tool, making record accuracy and layout management increasingly difficult over time.</p>
     <p><b>Define:</b> The primary problem is the lack of a centralized, interactive, and scalable cemetery management system that supports efficient grave location, accurate multi-cemetery record management, cross-cemetery family relationship tracking, and data verification for incomplete or inconsistent burial records.</p>
     <p><b>Ideate:</b> Cemora — a grid-based multi-cemetery platform where each plot is a searchable, coordinate-tagged, clickable node with complete burial data. Family connections are visualized within a cemetery via color-coded highlights and linking lines, and across cemeteries via linked profile cards with cemetery-switching functionality. Path visualization guides visitors from the entrance to the selected grave. A verification module automatically flags incomplete records for administrator correction through the interactive map. All cemeteries are managed from a single web admin panel, with a companion mobile app for visitors.</p>
+
+  <div class="card">
+    <p class="card-title">Hardware &amp; Software Requirements</p>
+
+    <div class="two-col">
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Minimum</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i5 (10th Gen) / AMD Ryzen 5</td></tr>
+            <tr><td>RAM</td><td>8 GB</td></tr>
+            <tr><td>Storage</td><td>256 GB SSD</td></tr>
+            <tr><td>Graphics</td><td>Integrated Graphics</td></tr>
+            <tr><td>Mobile Device</td><td>Android Smartphone for testing</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Developer Hardware — Recommended</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Specification</th></tr>
+            <tr><td>Processor</td><td>Intel Core i7 / AMD Ryzen 7</td></tr>
+            <tr><td>RAM</td><td>16 GB or higher</td></tr>
+            <tr><td>Storage</td><td>512 GB SSD or higher</td></tr>
+            <tr><td>Graphics</td><td>Dedicated GPU (optional)</td></tr>
+            <tr><td>Mobile Device</td><td>Android 8+ or iOS 13+ for testing</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Server Requirements</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Min / Recommended</th></tr>
+            <tr><td>Processor</td><td>Dual-Core / Quad-Core CPU</td></tr>
+            <tr><td>RAM</td><td>4 GB / 8 GB or higher</td></tr>
+            <tr><td>Storage</td><td>50 GB SSD / 100 GB SSD</td></tr>
+            <tr><td>Database</td><td>MySQL / PostgreSQL</td></tr>
+            <tr><td>Web Server</td><td>Apache or Nginx</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="hw-section">
+          <div class="hw-section-title">End-User Requirements — Visitors &amp; Families</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Smartphone</td><td>Android 8+ or iOS 13+</td></tr>
+            <tr><td>RAM</td><td>4 GB</td></tr>
+            <tr><td>Storage</td><td>200 MB available</td></tr>
+            <tr><td>Internet</td><td>Mobile Data or Broadband</td></tr>
+            <tr><td>GPS</td><td>Optional — for navigation support</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">End-User Requirements — Administrators</div>
+          <table class="hw-table">
+            <tr><th>Component</th><th>Minimum</th></tr>
+            <tr><td>Computer</td><td>Dual-Core Processor or higher</td></tr>
+            <tr><td>RAM</td><td>4 GB or higher</td></tr>
+            <tr><td>Storage</td><td>200 MB available</td></tr>
+            <tr><td>Browser</td><td>Chrome, Edge, Firefox, Safari</td></tr>
+            <tr><td>Internet</td><td>Stable Broadband</td></tr>
+          </table>
+        </div>
+        <div class="hw-section">
+          <div class="hw-section-title">Network Requirements</div>
+          <table class="hw-table">
+            <tr><td>Minimum Speed</td><td>5 Mbps</td></tr>
+            <tr><td>Recommended Speed</td><td>20 Mbps or higher</td></tr>
+            <tr><td>Network Type</td><td>Broadband, Fiber, or Mobile Data</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="hw-section" style="margin-top:8px;">
+      <div class="hw-section-title">Development Software</div>
+      <table class="hw-table">
+        <tr><th>Software</th><th>Purpose</th></tr>
+        <tr><td>WAMP Server</td><td>Local development environment (Apache, MySQL, PHP)</td></tr>
+        <tr><td>Flutter</td><td>Mobile application development</td></tr>
+        <tr><td>React.js / Next.js</td><td>Web application development</td></tr>
+        <tr><td>Node.js</td><td>Backend services</td></tr>
+        <tr><td>MySQL / PostgreSQL</td><td>Database management</td></tr>
+        <tr><td>Leaflet / Google Maps API</td><td>Grid-based mapping system (optional)</td></tr>
+        <tr><td>Visual Studio Code</td><td>Code editor</td></tr>
+        <tr><td>Git &amp; GitHub</td><td>Version control</td></tr>
+        <tr><td>Postman</td><td>API testing</td></tr>
+        <tr><td>Overleaf (LaTeX)</td><td>Documentation</td></tr>
+      </table>
+    </div>
   </div>
+
 </section>
 
 </main>
