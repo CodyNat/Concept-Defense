@@ -9,7 +9,7 @@
   --bg:#F0EDE6; --surface:#FDFCF8; --surface2:#ECEAE3; --border:#D5CFC4;
   --ink:#141E18; --ink2:#3A4A44;
   --green:#1E3828; --green-mid:#2C5240; --green-light:rgba(30,56,40,.08);
-  --gold:#C8892A; --gold-light:rgba(200,137,42,.1);
+  --gold:#8B5E10; --gold-light:rgba(139,94,16,.08);
   --radius:8px; --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 14px rgba(0,0,0,.05);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -33,7 +33,7 @@ main{max-width:900px;margin:0 auto;padding:40px 20px 80px;}
 @keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
 .concept-head{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border);}
-.concept-tag{display:inline-block;font-family:'Courier New',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.concept-tag{display:inline-block;font-family:'Courier New',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green-mid);margin-bottom:10px;font-weight:700;}
 .concept-head h2{font-size:clamp(1.3rem,3.2vw,1.9rem);color:var(--green);line-height:1.28;margin-bottom:8px;}
 .concept-subtitle{font-size:.92rem;color:var(--ink2);font-style:italic;}
 
@@ -61,8 +61,8 @@ main{max-width:900px;margin:0 auto;padding:40px 20px 80px;}
 
 .flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;}
 .flow-step{background:var(--green-light);border:1px solid rgba(45,74,56,.15);border-radius:6px;padding:7px 13px;font-size:.82rem;color:var(--green);font-family:'Courier New',monospace;}
-.flow-arrow{color:var(--gold);font-weight:bold;font-size:1rem;}
-.flow-result{background:var(--gold-light);border:1px solid rgba(184,130,46,.25);border-radius:6px;padding:7px 13px;font-size:.82rem;color:var(--gold);font-weight:bold;font-family:'Courier New',monospace;width:100%;text-align:center;margin-top:4px;}
+.flow-arrow{color:var(--green-mid);font-weight:bold;font-size:1rem;}
+.flow-result{background:var(--green-light);border:1px solid rgba(45,74,56,.2);border-radius:6px;padding:7px 13px;font-size:.82rem;color:var(--green);font-weight:bold;font-family:'Courier New',monospace;width:100%;text-align:center;margin-top:4px;}
 
 .demo-link{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;text-decoration:none;padding:11px 22px;border-radius:6px;font-family:'Courier New',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-top:16px;transition:background .15s;box-shadow:0 2px 8px rgba(45,74,56,.25);}
 .demo-link:hover{background:var(--green-mid);}
@@ -70,7 +70,7 @@ main{max-width:900px;margin:0 auto;padding:40px 20px 80px;}
 
 /* HW TABLES */
 .hw-section{margin-bottom:14px;}
-.hw-section-title{font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;padding:6px 0 6px 10px;border-left:3px solid var(--gold);}
+.hw-section-title{font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:8px;padding:6px 0 6px 10px;border-left:3px solid var(--green-mid);font-weight:700;}
 .hw-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:4px;}
 .hw-table th{background:var(--green);color:#fff;text-align:left;padding:7px 10px;font-family:'Courier New',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
 .hw-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--ink);vertical-align:top;}
